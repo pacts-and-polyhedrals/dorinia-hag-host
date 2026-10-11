@@ -177,6 +177,7 @@
       "poisoned"
     ],
     "traits": [
+      "Legendary Resistance (3/Day). If Auntie fails a saving throw, she can choose to succeed instead.",
       "Rejuvenation. When slain, Auntie collapses into a stone serpent idol until next dawn; unless the idol is destroyed or specially warded, she returns at full hit points.",
       "Shapechanger. Auntie can assume a giant serpent form without changing her statistics.",
       "Snake Hair. A creature that starts its turn within 5 ft. of Auntie must make DC 19 Constitution save, taking 6d6 poison damage on failure or half on success.",
@@ -300,6 +301,7 @@
       "poisoned"
     ],
     "traits": [
+      "Legendary Resistance (3/Day). If Gaga fails a saving throw, she can choose to succeed instead.",
       "Regeneration. Gaga regains 20 HP at the start of her turn. Acid damage suppresses this regeneration until the start of her following turn.",
       "Two Heads. Gaga has advantage on Perception checks and on saves against blinded, charmed, deafened, frightened, stunned, and unconscious.",
       "Spell Resistance. Gaga has advantage on saving throws against spells and magical effects.",

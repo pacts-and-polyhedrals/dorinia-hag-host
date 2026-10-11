@@ -46,7 +46,7 @@ if not man["download"].endswith("/" + "dorinia-hag-host.zip"): err("download ass
 # extract compiled packs and check what actually ships
 tmp = Path(tempfile.mkdtemp())
 subprocess.run(["node", str(TOOLS / "extract_packs.mjs"), str(MODULE / "packs"), str(tmp),
-                "hag-host-actors", "hag-host-journal"], check=True)
+                "hag-host-actors", "hag-host-journal", "hag-host-spells"], check=True)
 docs = [json.loads(f.read_text()) for f in (tmp / "hag-host-actors").glob("*.json")]
 actors = [d for d in docs if d.get("type") == "npc"]
 folders = {d["_id"] for d in docs if d["_key"].startswith("!folders!")}
@@ -80,13 +80,19 @@ for a in actors:
             counts["effects"] += 1
             for st in e["statuses"]:
                 if st not in K["conditions"]: err(f"{n}/{it['name']}: status {st}")
+        strict = it["type"] == "feat"
+        if it["type"] == "spell":
+            counts["spells"] = counts.get("spells", 0) + 1
+            if it["system"].get("method") not in ("spell", "innate", "atwill"): err(f"{n}/{it['name']}: spell method")
+            if it["system"].get("method") == "innate" and not it["system"]["uses"]["max"]: err(f"{n}/{it['name']}: innate without uses")
+            if "preparation" in it["system"]: err(f"{n}/{it['name']}: legacy preparation field")
         for key, act in it["system"]["activities"].items():
             counts["activities"] += 1
-            where = f"{n}/{it['name']}/{act['name']}"
+            where = f"{n}/{it['name']}/{act.get('name') or act['type']}"
             if key != act["_id"] or not ID_RE.match(key): err(f"{where}: activity id")
             if act["type"] not in K["activity"]: err(f"{where}: activity type")
-            if act["activation"]["type"] not in K["activation"]: err(f"{where}: activation {act['activation']['type']}")
-            if act["target"]["affects"]["type"] not in K["targets"]: err(f"{where}: target type")
+            if act.get("activation", {}).get("type", "") and act["activation"]["type"] not in K["activation"]: err(f"{where}: activation {act['activation']['type']}")
+            if act.get("target", {}).get("affects", {}).get("type", "") not in K["targets"]: err(f"{where}: target type")
             if act["activation"]["type"] == "legendary":
                 has_leg = True; counts["legendary"] += 1
                 if not act["activation"]["value"]: err(f"{where}: legendary cost")
@@ -97,19 +103,30 @@ for a in actors:
             for part in (act.get("damage") or {}).get("parts", []) + ([act["healing"]] if "healing" in act else []):
                 for t in part["types"]:
                     if t not in K["damage"] | {"healing", "temphp"}: err(f"{where}: damage type {t}")
-                if not part.get("number") and not part["custom"]["enabled"]: err(f"{where}: empty damage part")
-            if act["type"] == "attack":
+                if strict and not part.get("number") and not part.get("custom", {}).get("enabled"): err(f"{where}: empty damage part")
+            if act["type"] == "attack" and strict:
                 if not act["attack"]["flat"] or not act["attack"]["bonus"]: err(f"{where}: attack bonus")
-            if act["type"] == "save":
+            if act["type"] == "save" and strict:
                 if not act["save"]["ability"] or not all(x in K["abilities"] for x in act["save"]["ability"]): err(f"{where}: save ability")
                 if act["save"]["dc"]["calculation"] != "" or not act["save"]["dc"]["formula"].isdigit(): err(f"{where}: save dc")
                 if act["damage"]["onSave"] not in ("half", "none", "full"): err(f"{where}: onSave")
         desc = it["system"]["description"]["value"]
         if desc.count("[[") != desc.count("]]"): err(f"{n}/{it['name']}: unbalanced enricher")
+    if n.split(" —")[0] in ("Babha Yagha", "Mama Yagha", "Gahgah Yagha"):
+        if s["resources"]["legres"]["max"] != 3: err(f"{n}: hag without 3 legendary resistances")
+        cov = [i for i in a["items"] if i.get("flags", {}).get("dorinia-hag-host", {}).get("coven")]
+        if len(cov) != 14: err(f"{n}: expected 14 coven spells, got {len(cov)}")
+        if not any(i["type"] == "spell" and i["system"]["method"] == "spell" for i in a["items"]): err(f"{n}: no individual spells")
+        if not s["attributes"]["spell"]["level"]: err(f"{n}: no caster level")
     if bool(s["resources"]["legact"]["max"]) != has_leg: err(f"{n}: legendary pool/actions mismatch")
     if s["resources"]["legres"]["max"] and not any(i["system"]["identifier"] == "legendary-resistance" for i in a["items"]):
         err(f"{n}: legres without legendary-resistance item")
 
+sdocs = [json.loads(f.read_text()) for f in (tmp / "hag-host-spells").glob("*.json")]
+spell_ids = {d["_id"] for d in sdocs if d.get("type") == "spell"}
+for d in sdocs:
+    if d.get("type") == "spell" and d.get("folder") not in {x["_id"] for x in sdocs if x["_key"].startswith("!folders!")}:
+        err(f"spell {d['name']}: folder missing")
 # journal links
 jdocs = [json.loads(f.read_text()) for f in (tmp / "hag-host-journal").glob("*.json")]
 links = 0
@@ -118,13 +135,16 @@ for j in jdocs:
         for uid in re.findall(r"@UUID\[Compendium\.dorinia-hag-host\.hag-host-actors\.Actor\.([A-Za-z0-9]{16})\]", p["text"]["content"]):
             links += 1
             if uid not in ids: err(f"journal {p['name']}: dead link {uid}")
+        for uid in re.findall(r"@UUID\[Compendium\.dorinia-hag-host\.hag-host-spells\.Item\.([A-Za-z0-9]{16})\]", p["text"]["content"]):
+            links += 1
+            if uid not in spell_ids: err(f"journal {p['name']}: dead spell link {uid}")
 
 # JS syntax
 r = subprocess.run(["node", "--check", str(MODULE / "scripts/dorinia-hag-host.js")], capture_output=True, text=True)
 if r.returncode: err("script syntax: " + r.stderr)
 
 print(f"actors={len(actors)} folders={len(folders)} items={counts['items']} activities={counts['activities']} "
-      f"effects={counts['effects']} legendary_activities={counts['legendary']} journal_pages={sum(len(j['pages']) for j in jdocs)} roster_links={links}")
+      f"effects={counts['effects']} spells_on_actors={counts.get('spells',0)} spells_in_pack={len(spell_ids)} legendary_activities={counts['legendary']} journal_pages={sum(len(j['pages']) for j in jdocs)} roster_links={links}")
 print(f"zip entries={len(names)}")
 if errors:
     print("FAIL"); [print(" -", e) for e in errors]; sys.exit(1)

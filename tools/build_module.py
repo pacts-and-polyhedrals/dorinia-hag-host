@@ -29,7 +29,7 @@ TOOLS = ROOT / "tools"
 
 # ---------------------------------------------------------------- release config
 MODULE_ID = "dorinia-hag-host"
-VERSION = "1.2.0"
+VERSION = "1.3.0"
 GH_OWNER = "pacts-and-polyhedrals"
 GH_REPO = MODULE_ID
 GH = f"https://github.com/{GH_OWNER}/{GH_REPO}"
@@ -459,6 +459,266 @@ def build_legendary(actor_key, actor_name, leg_text, sort, actions_by_name, trai
     return iid, item, cost
 
 
+# ---------------------------------------------------------------- spells
+import yaml  # noqa: E402
+from spell_data import CASTERS, COVEN, COVEN_MEMBERS, HOMEBREW, LISTS  # noqa: E402
+
+SPELL_PACK = "hag-host-spells"
+SRD_DIR = SOURCE / "srd-spells"
+HB_IMG_FROM = {
+    "Coven's Rot": "ray-of-enfeeblement", "Archfey Drain": "vampiric-touch", "Hag-Ring of Highforest": "fear",
+    "Soul Lantern Siphon": "vampiric-touch", "Grandma's Lullaby": "sleep", "Hollow the Name": "feeblemind",
+    "Viper's Kiss": "poison-spray", "Coils of the Mother Serpent": "hold-person", "Gorgon Bloom": "flesh-to-stone",
+    "Twin-Throat Bellow": "thunderwave", "Troll-Blood Boil": "stoneskin", "Earthshaker Stomp": "shatter",
+    "Rotbriar Hex": "bestow-curse", "Gorgon's Glance": "flesh-to-stone", "Venomwell Bomb": "stinking-cloud",
+    "Gut-Stitch": "cure-wounds",
+}
+SPELL_FOLDERS = {
+    "Coven": ("Yagha Coven — Shared Spells", "#4b2a5c", 100000),
+    "Grandma": ("Grandma — Babha Yagha", "#4b2a5c", 200000),
+    "Auntie": ("Auntie — Mama Yagha", "#2f5a2a", 300000),
+    "Gaga": ("Gaga — Gahgah Yagha", "#6b3a1e", 400000),
+    "Servants": ("Coven Servants", "#3a3a3a", 500000),
+    "SRD": ("Official Spells (SRD 5.1)", "#1f3a5c", 600000),
+}
+_srd_cache = {}
+
+
+def caster_key(actor_name):
+    return next((k for k in CASTERS if actor_name.startswith(k)), None)
+
+
+def srd_spell(slug):
+    if slug not in _srd_cache:
+        d = yaml.safe_load((SRD_DIR / f"{slug}.yml").read_text(encoding="utf-8"))
+        d.pop("_key", None)
+        d.pop("folder", None)
+        d["system"].pop("preparation", None)
+        d["_stats"] = dict(STATS, compendiumSource=f"Compendium.dnd5e.spells.Item.{d['_id']}")
+        d["system"]["source"]["custom"] = "SRD 5.1 (CC-BY-4.0)"
+        _srd_cache[slug] = d
+    return json.loads(json.dumps(_srd_cache[slug]))
+
+
+def _spell_activity(key, sp, kind):
+    aid = did(key, "spellact", kind)
+    rng_v, rng_u = sp["range"]
+    a = activity_base(aid, kind, "", activation=sp["time"], rng=None)
+    a["range"] = {"override": False, "value": "", "units": "", "special": ""}
+    a["target"]["override"] = False
+    a["target"]["affects"] = {"count": "", "type": "", "choice": False, "special": ""}
+    a["duration"]["override"] = False
+    a["consumption"]["spellSlot"] = True
+    scale = sp.get("scale", 0)
+    parts = []
+    for f, t in sp.get("dmg", []):
+        p = damage_part(f, t)
+        if scale and not parts:
+            p["scaling"] = {"mode": "whole", "number": scale, "formula": ""}
+        parts.append(p)
+    if kind == "save":
+        a["save"] = {"ability": [sp["save"]], "dc": {"calculation": "spellcasting", "formula": ""}}
+        a["damage"] = {"onSave": sp.get("on_save", "half"), "parts": parts}
+    elif kind == "attack":
+        a["attack"] = {"ability": "", "bonus": "", "critical": {"threshold": None}, "flat": False,
+                       "type": {"value": "melee" if sp["atk"] == "msak" else "ranged", "classification": "spell"}}
+        a["damage"] = {"critical": {"bonus": ""}, "includeBase": True, "parts": parts}
+    elif kind == "damage":
+        a["damage"] = {"critical": {"allow": False, "bonus": ""}, "parts": parts}
+    elif kind == "heal":
+        f, t = sp["heal"]
+        h = damage_part(f, t)
+        if scale:
+            h["scaling"] = {"mode": "whole", "number": scale, "formula": ""}
+        a["healing"] = h
+    return aid, a
+
+
+def homebrew_spell(name):
+    sp = HOMEBREW[name]
+    key = f"homebrew|{name}"
+    sid = did("spell", name)
+    effects = [status_effect(key, c, r) for c, r in sp.get("statuses", [])]
+    aid, act = _spell_activity(key, sp, sp["kind"])
+    act["effects"] = [({"_id": e["_id"], "onSave": False} if sp["kind"] == "save" else {"_id": e["_id"]}) for e in effects]
+    activities = {aid: act}
+    for f, t in sp.get("rider", []):
+        rid = did(key, "spellact", "rider")
+        r = activity_base(rid, "damage", "Ring Torment (start of turn)", activation="special", rng=None)
+        r["range"] = {"override": False, "value": "", "units": "", "special": ""}
+        r["target"]["affects"] = {"count": "1", "type": "creature", "choice": False, "special": ""}
+        r["consumption"]["spellSlot"] = False
+        r["damage"] = {"critical": {"allow": False, "bonus": ""}, "parts": [damage_part(f, t)]}
+        activities[rid] = r
+    tpl = sp.get("template")
+    tgt_count, tgt_type = sp.get("target", ("", ""))
+    dur_v, dur_u = sp["duration"]
+    rng_v, rng_u = sp["range"]
+    props = list(sp["comps"]) + (["concentration"] if sp.get("conc") else [])
+    desc = f"<p>{sp['text']}</p>" + (f"<p><strong>At Higher Levels.</strong> {sp['higher']}</p>" if sp.get("higher") else "")
+    desc += "<p><em>Homebrew — Doorinia: The Yagha Coven War Host.</em></p>"
+    return {
+        "_id": sid, "name": name, "type": "spell", "img": srd_spell(HB_IMG_FROM[name])["img"], "sort": 0,
+        "system": {
+            "description": {"value": desc, "chat": ""},
+            "source": {"custom": SOURCE_LABEL + " (homebrew)", "book": "", "page": "", "license": "", "rules": "2014"},
+            "activation": {"type": sp["time"], "value": 1, "condition": ""},
+            "duration": {"value": "" if dur_v is None else str(dur_v), "units": dur_u},
+            "target": {"affects": {"count": "" if tpl else tgt_count, "type": "creature" if tpl else tgt_type, "choice": bool(tpl), "special": ""},
+                       "template": {"count": "1" if tpl else "", "contiguous": False, "type": tpl[0] if tpl else "",
+                                    "size": str(tpl[1]) if tpl else "", "width": "", "height": "", "units": "ft"}},
+            "range": {"value": "" if rng_v is None else str(rng_v), "units": rng_u, "special": ""},
+            "uses": {"max": "", "spent": 0, "recovery": []},
+            "level": sp["level"], "school": sp["school"],
+            "materials": {"value": sp.get("material", ""), "consumed": False, "cost": 0, "supply": 0},
+            "method": "spell", "prepared": 1, "properties": props, "activities": activities,
+            "identifier": re.sub(r"[^a-z0-9]+", "-", name.lower().replace("'", "")).strip("-"), "sourceItem": "",
+        },
+        "effects": effects, "flags": {MODULE_ID: {"homebrew": True, "list": sp["owner"]}},
+        "folder": None, "ownership": {"default": 0}, "_stats": dict(STATS),
+    }
+
+
+def spell_doc(name_or_slug):
+    return homebrew_spell(name_or_slug) if name_or_slug in HOMEBREW else srd_spell(name_or_slug)
+
+
+def actor_spell(actor_key, src, method, uses, *, coven=False):
+    sp = json.loads(json.dumps(src))
+    sp["_id"] = did(actor_key, "spell", sp["name"], "coven" if coven else method)
+    sys_ = sp["system"]
+    sys_["method"] = method
+    sys_["prepared"] = 1 if method == "spell" else 0
+    sys_.pop("preparation", None)
+    if uses:
+        sys_["uses"] = {"max": str(uses), "spent": 0, "recovery": [{"period": "day", "type": "recoverAll", "formula": ""}]}
+        for act in sys_["activities"].values():
+            act.setdefault("consumption", {}).setdefault("targets", [])
+            act["consumption"]["targets"] = [t for t in act["consumption"]["targets"] if t.get("type") != "itemUses"] + \
+                [{"type": "itemUses", "target": "", "value": "1", "scaling": {"mode": "", "formula": ""}}]
+            act["consumption"]["spellSlot"] = False
+    elif method == "atwill":
+        for act in sys_["activities"].values():
+            act.setdefault("consumption", {})["spellSlot"] = False
+    sp.setdefault("flags", {})
+    sp["flags"][MODULE_ID] = dict(sp["flags"].get(MODULE_ID, {}), generated=True)
+    if coven:
+        sp["flags"][MODULE_ID]["coven"] = sys_["identifier"]
+        sp["name"] = sp["name"]
+    for e in sp.get("effects", []):
+        e.pop("_key", None)
+    return sp
+
+
+def spellcasting_feature(actor_key, m, prof):
+    ck = caster_key(m["name"])
+    if not ck:
+        return []
+    c = CASTERS[ck]
+    ab = c["ability"]
+    mod = (m["abilities"][ab] - 10) // 2
+    dc, atk = 8 + prof + mod, prof + mod
+    abn = {"cha": "Charisma", "wis": "Wisdom", "int": "Intelligence"}[ab]
+    who = c.get("title") or short(m["name"])
+    out = []
+    lst = LISTS.get(ck, [])
+    def names(method=None, uses=None):
+        return ", ".join(f"<em>{spell_doc(s)['name'].lower()}</em>" for s, mth, u in lst if (method is None or mth == method) and (uses is None or u == uses))
+    if c["level"]:
+        by_lvl = {}
+        for s, mth, u in lst:
+            by_lvl.setdefault(spell_doc(s)["system"]["level"], []).append(f"<em>{spell_doc(s)['name'].lower()}</em>")
+        rows = "".join(f"<li>{'Cantrips (at will)' if L == 0 else f'Level {L}'}: {', '.join(v)}</li>" for L, v in sorted(by_lvl.items()))
+        out.append(("Spellcasting", f"<p>{who} is a {c['level']}th-level spellcaster. Her spellcasting ability is {abn} "
+                    f"(spell save DC {dc}, {'+' if atk >= 0 else ''}{atk} to hit with spell attacks). She has the following spells prepared:</p><ul>{rows}</ul>"))
+    else:
+        rows = []
+        if names("atwill"): rows.append(f"<li>At will: {names('atwill')}</li>")
+        for n in (3, 2, 1):
+            if names("innate", n): rows.append(f"<li>{n}/day each: {names('innate', n)}</li>")
+        out.append(("Innate Spellcasting", f"<p>{who}'s innate spellcasting ability is {abn} (spell save DC {dc}, "
+                    f"{'+' if atk >= 0 else ''}{atk} to hit with spell attacks). It can innately cast the following spells, requiring no material components:</p><ul>{''.join(rows)}</ul>"))
+    if ck in COVEN_MEMBERS:
+        by_lvl = {}
+        for s, _u in COVEN:
+            by_lvl.setdefault(spell_doc(s)["system"]["level"], []).append(f"<em>{spell_doc(s)['name'].lower()}</em>")
+        rows = "".join(f"<li>Level {L}: {', '.join(v)}</li>" for L, v in sorted(by_lvl.items()))
+        out.append(("Shared Spellcasting (Yagha Coven)", "<p>While all three hags of the Yagha Coven are within 30 feet of one another, "
+                    "each of them can cast the coven's spells. Each coven spell can be cast once per day <strong>by the whole coven</strong>, "
+                    "not once per hag: when one hag casts it, it is spent for all three. The coven uses the casting hag's spell save DC and attack bonus.</p>"
+                    f"<ul>{rows}</ul><p><em>Foundry: the module syncs coven spell uses across all three hags and, if enabled in the module settings, "
+                    "blocks a coven spell when the hags' tokens are not all within 30 feet of each other on the current scene.</em></p>"))
+    feats = []
+    for nm, html_ in out:
+        iid, it = make_item(actor_key, nm, "icons/svg/book.svg", html_, sort=0, id_tag="spellcasting")
+        feats.append(it)
+    return feats
+
+
+def actor_spells(actor_key, m):
+    ck = caster_key(m["name"])
+    if not ck:
+        return []
+    out = [actor_spell(actor_key, spell_doc(s), mth, u) for s, mth, u in LISTS.get(ck, [])]
+    if ck in COVEN_MEMBERS:
+        out += [actor_spell(actor_key, spell_doc(s), "innate", u, coven=True) for s, u in COVEN]
+    return out
+
+
+def spells_pack_docs():
+    folders, docs, seen = [], [], set()
+    fids = {}
+    for k, (nm, col, srt) in SPELL_FOLDERS.items():
+        fid = did("spellfolder", k)
+        fids[k] = fid
+        folders.append({"_id": fid, "_key": f"!folders!{fid}", "name": nm, "type": "Item", "folder": None, "sorting": "a",
+                        "sort": srt, "color": col, "description": "", "flags": {}, "_stats": dict(STATS)})
+    used = [s for lst in LISTS.values() for s, _, _ in lst] + [s for s, _ in COVEN]
+    for s in used:
+        if s in seen:
+            continue
+        seen.add(s)
+        d = spell_doc(s)
+        d["_id"] = did("packspell", s)
+        d["folder"] = fids[HOMEBREW[s]["owner"]] if s in HOMEBREW else fids["SRD"]
+        d["system"]["method"] = "spell"
+        d["system"]["prepared"] = 0
+        d["_key"] = f"!items!{d['_id']}"
+        for e in d.get("effects", []):
+            e["_key"] = f"!items.effects!{d['_id']}.{e['_id']}"
+        docs.append(d)
+    return docs + folders
+
+
+def spell_uuid(s):
+    return f"Compendium.{MODULE_ID}.{SPELL_PACK}.Item.{did('packspell', s)}"
+
+
+def spellbook_page():
+    def link(s):
+        return f"@UUID[{spell_uuid(s)}]{{{spell_doc(s)['name']}}}"
+    html_ = ["<h2>The Coven Spellbook</h2><p>Every spell below lives in the <strong>Yagha Coven War Host — Spells</strong> compendium. "
+             "Official spells are from the SRD 5.1; homebrew spells are marked ✦.</p>"]
+    html_.append("<h3>Shared Spellcasting — the Yagha Coven</h3><p>Once per day each, shared by all three hags; all three must be within 30 ft of each other.</p><ul>")
+    for s, _ in COVEN:
+        html_.append(f"<li>{'✦ ' if s in HOMEBREW else ''}{link(s)} (level {spell_doc(s)['system']['level']})</li>")
+    html_.append("</ul>")
+    for ck, lst in LISTS.items():
+        c = CASTERS[ck]
+        title = f"{c.get('title', ck)} — {ck}" if c.get("title") else ck
+        mode = f"{c['level']}th-level spellcaster ({c['ability'].upper()})" if c["level"] else f"Innate spellcaster ({c['ability'].upper()})"
+        html_.append(f"<h3>{esc(title)}</h3><p><em>{mode}</em></p><ul>")
+        for s, mth, u in lst:
+            tag = "at will" if mth == "atwill" else (f"{u}/day" if mth == "innate" else f"level {spell_doc(s)['system']['level']}")
+            html_.append(f"<li>{'✦ ' if s in HOMEBREW else ''}{link(s)} — {tag}</li>")
+        html_.append("</ul>")
+    html_.append("<h3>Hierarchy</h3><ul><li><strong>Grandma</strong> — fear, darkness, soul theft, curses; the coven's highest caster.</li>"
+                 "<li><strong>Auntie</strong> — poison, serpents and petrification.</li><li><strong>Gaga</strong> — thunder, earth and brute force.</li>"
+                 "<li><strong>Servants</strong> — the Rotbriar Hexer (Grandma's curse-relay), Petrifying Eye Acolyte and Venomwell Alchemist (Auntie's), "
+                 "Berbalang Secret-Eater (Grandma's spy) and Troll Flesh-Mender (Gaga's field surgeon).</li></ul>")
+    return "".join(html_)
+
+
 # ---------------------------------------------------------------- actors
 def build_actor(m, folder_id, sort):
     actor_key = m["name"]
@@ -484,6 +744,11 @@ def build_actor(m, folder_id, sort):
         for lt in m["legendary"]:
             _, it, _cost = build_legendary(actor_key, m["name"], lt, s, actions_by_name, traits_by_name)
             items.append(it); s += 1000
+    prof = 2 if m["cr"] < 5 else 3 if m["cr"] < 9 else 4 if m["cr"] < 13 else 5 if m["cr"] < 17 else 6 if m["cr"] < 21 else 7
+    for it in spellcasting_feature(actor_key, m, prof):
+        it["sort"] = s; items.append(it); s += 1000
+    items += actor_spells(actor_key, m)
+    ck = caster_key(m["name"])
 
     # embedded keys for the CLI
     for it in items:
@@ -521,7 +786,8 @@ def build_actor(m, folder_id, sort):
                              "swim": spd.get("swim") or None, "climb": spd.get("climb") or None,
                              "burrow": spd.get("burrow") or None, "units": "ft",
                              "hover": bool(spd.get("fly")) and "construct" == m["type"]},
-                "spellcasting": "cha",
+                "spellcasting": CASTERS[ck]["ability"] if ck else "cha",
+                "spell": {"level": CASTERS[ck]["level"] if ck else 0},
             },
             "details": {
                 "cr": m["cr"], "alignment": "Chaotic Evil" if m["type"] != "construct" else "Unaligned",
@@ -630,15 +896,16 @@ def build_journal(creatures):
 </ol>
 <p>XP values on each host page use the standard CR-to-XP table so you can budget waves with your usual encounter math.</p>
 """),
+        ("Coven Spellbook", spellbook_page()),
         ("Foundry Notes", f"""
 <h2>Using this module in Foundry</h2>
 <ul>
 <li>All 24 stat blocks live in the <strong>Yagha Coven War Host — Actors</strong> compendium, foldered by host. Drag any actor onto a scene, or use <em>Import All Content</em> from the compendium's context menu.</li>
 <li>On first load as GM you're offered a one-click import into a world folder. You can run it later from the console: <code>game.modules.get("{MODULE_ID}").api.importAll()</code>.</li>
 <li>Attacks and saves are native dnd5e Activities. Saves that inflict conditions carry Active Effects you can apply from the chat card.</li>
-<li>Legendary actions consume the creature's legendary action pool automatically; Grandma's Legendary Resistance consumes her 3/day pool.</li>
+<li>Legendary actions consume the creature's legendary action pool automatically; all three hags have Legendary Resistance (3/Day), which consumes their legendary resistance pool.</li>
 <li>Regeneration traits include a <em>Regenerate</em> heal activity — click it at the start of the creature's turn (skip it if acid suppression applies).</li>
-<li>Every description also carries inline roll links as a fallback.</li>
+<li>Every description also carries inline roll links as a fallback.</li><li>The hags and their spellcasting servants carry their full spell lists. Coven spells are shared: casting one on any hag spends it on all three.</li><li>Open <strong>Game Settings → Configure Settings → Doorinia: Yagha Coven War Host → Open Coven Manager</strong> to import, update in place, rebuild or remove the world copies.</li>
 </ul>
 """),
     ]
@@ -677,12 +944,14 @@ def manifest():
         "packs": [
             {"name": ACTOR_PACK, "label": "Yagha Coven War Host — Actors", "path": f"packs/{ACTOR_PACK}",
              "type": "Actor", "system": "dnd5e", "ownership": {"PLAYER": "NONE", "ASSISTANT": "OWNER"}},
+            {"name": SPELL_PACK, "label": "Yagha Coven War Host — Spells", "path": f"packs/{SPELL_PACK}",
+             "type": "Item", "system": "dnd5e", "ownership": {"PLAYER": "NONE", "ASSISTANT": "OWNER"}},
             {"name": JOURNAL_PACK, "label": "Yagha Coven War Host — GM Guide", "path": f"packs/{JOURNAL_PACK}",
              "type": "JournalEntry", "ownership": {"PLAYER": "NONE", "ASSISTANT": "OWNER"}},
         ],
         "packFolders": [{"name": "Pacts & Polyhedrals", "sorting": "m", "color": "#3b1f4a", "packs": [],
                          "folders": [{"name": "Doorinia: Yagha Coven War Host", "sorting": "a", "color": "#4b2a5c",
-                                      "packs": [ACTOR_PACK, JOURNAL_PACK]}]}],
+                                      "packs": [ACTOR_PACK, SPELL_PACK, JOURNAL_PACK]}]}],
         "languages": [],
         "url": GH,
         "manifest": f"{GH}/releases/latest/download/module.json",
@@ -723,6 +992,7 @@ def main():
 
     write_docs(BUILD / ACTOR_PACK, actors + folders)
     write_docs(BUILD / JOURNAL_PACK, [build_journal(creatures)])
+    write_docs(BUILD / SPELL_PACK, spells_pack_docs())
 
     (MODULE / "module.json").write_text(json.dumps(manifest(), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 
@@ -730,7 +1000,7 @@ def main():
     packs_dir = MODULE / "packs"
     if packs_dir.exists():
         shutil.rmtree(packs_dir)
-    subprocess.run(["node", str(TOOLS / "compile_packs.mjs"), str(BUILD), str(packs_dir), ACTOR_PACK, JOURNAL_PACK],
+    subprocess.run(["node", str(TOOLS / "compile_packs.mjs"), str(BUILD), str(packs_dir), ACTOR_PACK, JOURNAL_PACK, SPELL_PACK],
                    check=True)
 
     # release assets: zip with files at root + standalone module.json
