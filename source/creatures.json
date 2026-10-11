@@ -64,13 +64,18 @@
       "Legendary Resistance (3/Day). If Grandma fails a saving throw, she can choose to succeed instead.",
       "Magic Resistance. Grandma has advantage on saving throws against spells and other magical effects.",
       "Regeneration. Grandma regains 20 hit points at the start of her turn if she has at least 1 hit point.",
-      "Doorinian Matriarch. Friendly Grandma units within 30 feet gain advantage on saving throws against frightened and charmed effects."
+      "Doorinian Matriarch. Friendly Grandma units within 30 feet that are not immune to the charmed or frightened condition have advantage on saving throws against being charmed or frightened."
     ],
     "actions": [
       {
+        "name": "Multiattack",
+        "kind": "utility",
+        "text": "Grandma uses Frightening Gaze and makes two Claw attacks."
+      },
+      {
         "name": "Claw",
         "kind": "attack",
-        "text": "Two claws are normally used after Frightening Gaze.",
+        "text": "Grandma rakes a creature with filthy, venom-crusted talons.",
         "tohit": 9,
         "damage": [
           [
@@ -112,9 +117,9 @@
       }
     ],
     "legendary": [
-      "Cackle (1). Creatures within 30 ft. make DC 21 Wisdom saves or become frightened for 1 minute.",
+      "Cackle (1). Each creature of Grandma's choice within 30 ft. that can hear her makes a DC 22 Wisdom saving throw or becomes frightened of her for 1 minute (repeat the save at the end of each of its turns).",
       "Summon Servants (2). Summon 1d4+1 Darklings, Berbalangs, or other Grandma minions within 30 ft.",
-      "Rotting Curse (3). One creature within 60 ft. makes DC 21 Constitution save, taking 8d8 necrotic damage on a failure and aging 1d6 x 10 years; half damage and no aging on success."
+      "Rotting Curse (3). One creature within 60 ft. makes a DC 22 Constitution saving throw, taking 8d8 necrotic damage and aging 1d6 x 10 years on a failure, or half damage and no aging on a success."
     ],
     "desc": "Once the architect of the coven's Highforest atrocities, Babha Yagha is now called Grandma throughout Doorinia. She drains captured Archfey to rewrite the Domain of Delight and rules through secrets, curses, and disciplined waves of expendable servants."
   },
@@ -186,6 +191,11 @@
     ],
     "actions": [
       {
+        "name": "Multiattack",
+        "kind": "utility",
+        "text": "Auntie makes two attacks: one with her Claws and one with her Venomous Bite."
+      },
+      {
         "name": "Claws",
         "kind": "attack",
         "text": "Auntie tears at a nearby victim.",
@@ -237,8 +247,8 @@
     "legendary": [
       "Venomous Bite (1). Make one bite attack.",
       "Serpentine Coils (1). Move up to speed without provoking; creatures moved through make DC 17 Dexterity save or take 2d8+4 bludgeoning and fall prone.",
-      "Snake Hair (1). Up to three creatures within 30 ft. make DC 17 Dexterity saves or take 2d8+4 piercing damage and become poisoned until they save at end of turn.",
-      "Recharge Innate Magic (2). Roll d6; on 5-6 recharge one limited magical feature of Auntie or an allied coven caster."
+      "Hair Lash (1). Up to three creatures within 30 ft. make DC 17 Dexterity saving throws, each taking 2d8+4 piercing damage and becoming poisoned until the end of its next turn on a failure.",
+      "Venom Renewal (2). Auntie regains one expended spell slot of 3rd level or lower, or one Auntie servant within 60 ft. that she can see regains one expended daily use of an innate spell."
     ],
     "desc": "The coven's venomous huntress, now called Auntie by Doorinia's terrified inhabitants. She breeds serpent troops, weaponizes petrification, and turns battlefields into poisonous kill-zones."
   },
@@ -303,11 +313,16 @@
     "traits": [
       "Legendary Resistance (3/Day). If Gaga fails a saving throw, she can choose to succeed instead.",
       "Regeneration. Gaga regains 20 HP at the start of her turn. Acid damage suppresses this regeneration until the start of her following turn.",
-      "Two Heads. Gaga has advantage on Perception checks and on saves against blinded, charmed, deafened, frightened, stunned, and unconscious.",
+      "Two Heads. Gaga has advantage on Wisdom (Perception) checks and on saving throws against being blinded, deafened, frightened, stunned, or knocked unconscious.",
       "Spell Resistance. Gaga has advantage on saving throws against spells and magical effects.",
       "Break Their Line. When Gaga knocks a creature prone or moves it against its will, one allied Gaga minion within 30 ft. may move 10 ft. without provoking opportunity attacks."
     ],
     "actions": [
+      {
+        "name": "Multiattack",
+        "kind": "utility",
+        "text": "Gaga makes two attacks: one with her Bite and one with Claw and Seize."
+      },
       {
         "name": "Bite",
         "kind": "attack",
@@ -328,7 +343,7 @@
       {
         "name": "Claw and Seize",
         "kind": "attack",
-        "text": "On a hit the target is also grappled (escape DC 15) and restrained while grappled.",
+        "text": "On a hit the target is grappled (escape DC 18) and is restrained until the grapple ends. Gaga has two claws and can grapple two creatures at once.",
         "tohit": 15,
         "damage": [
           [
@@ -361,9 +376,9 @@
       }
     ],
     "legendary": [
-      "Multiattack (1). Gaga makes two claw or bite attacks.",
+      "Rend (1). Gaga makes one Bite or Claw and Seize attack.",
       "Enraging Howl (2). Use Enraging Howl.",
-      "Stunning Slamalam (1). One creature hit by Gaga makes DC 18 Constitution save or is stunned until end of its next turn.",
+      "Stunning Slamalam (1). One creature Gaga hit with an attack since the end of her last turn makes a DC 18 Constitution saving throw or is stunned until the end of its next turn.",
       "Flying Headbutt (2). Hit a Large or smaller creature; DC 18 Strength save or prone and pushed 10 ft."
     ],
     "desc": "Gahgah Yagha, universally shortened to Gaga in Glass Home, is the coven's blunt instrument: a two-headed troll hag who believes every tactical problem can be solved by hitting it harder and sending more bodies through the breach."
@@ -407,7 +422,7 @@
     "cond": [],
     "traits": [
       "Death Flash. When reduced to 0 HP, bright light erupts in 10 ft.; enemies make DC 12 Constitution save or are blinded until end of next turn.",
-      "Veiled Advance. Gains advantage on its first attack each combat if it began its turn in dim light or darkness."
+      "Veiled Advance. If the darkling started its turn in dim light or darkness, its first Shadow Knife hit this turn deals an extra 2d6 necrotic damage."
     ],
     "actions": [
       {
@@ -615,8 +630,8 @@
     "imm": [],
     "cond": [],
     "traits": [
-      "Coven Relay. When a Grandma ally within 30 ft. imposes frightened, the Hexer can move its Hex Mark to that creature without an action.",
-      "Briar Screen. Allies directly behind the Hexer gain half cover against ranged attacks."
+      "Coven Relay. When a Grandma ally within 30 ft. imposes the frightened condition on a creature, the Hexer can move its Rotbriar Hex to that creature (no action required).",
+      "Briar Screen. Allies directly behind the Hexer have three-quarters cover against ranged attacks, instead of the half cover an intervening creature normally provides."
     ],
     "actions": [
       {
@@ -765,13 +780,13 @@
     "cond": [],
     "traits": [
       "Rooted Ambush. While motionless among plants it is indistinguishable from thorn growth.",
-      "Memory Scent. Ignores disadvantage from frightened targets being hidden or invisible within 30 ft."
+      "Memory Scent. The stalker has blindsight out to 30 ft. against frightened creatures: it knows exactly where they are, and they gain no benefit from being hidden or invisible against it."
     ],
     "actions": [
       {
         "name": "Thorn Rake",
         "kind": "attack",
-        "text": "Hooked branches drag a victim.",
+        "text": "Hooked branches drag the victim: on a hit, a Large or smaller target is pulled up to 10 ft. toward the stalker.",
         "tohit": 7,
         "damage": [
           [
@@ -893,7 +908,7 @@
     "cond": [],
     "traits": [
       "Constricting Formation. A creature grappled by a Coil Adept has disadvantage on saves against poison from other Auntie units.",
-      "Slither Through. Can move through spaces of friendly Auntie units."
+      "Slither Through. The adept can move through the space of any hostile creature, regardless of size, and friendly creatures' spaces don't count as difficult terrain for it. It can't end its move in another creature's space."
     ],
     "actions": [
       {
@@ -967,7 +982,7 @@
     "imm": [],
     "cond": [],
     "traits": [
-      "Marked Venom. Attacks against a target poisoned by an Auntie ally ignore half cover.",
+      "Marked Venom. The archer's ranged attacks ignore half cover and three-quarters cover against creatures that are poisoned.",
       "Volley Discipline. If another Spitebow attacked the same target this round, add +2 to hit."
     ],
     "actions": [
@@ -1097,7 +1112,7 @@
     "cond": [],
     "traits": [
       "Handler. Friendly basilisks and serpent warbeasts within 30 ft. gain +10 ft. speed.",
-      "Chain the Stone. Advantage on attacks against restrained or petrified targets."
+      "Chain the Stone. The Chainmaster's Barbed Chain scores a critical hit against a restrained creature on a roll of 18-20. Against a petrified creature, its damage ignores the resistance that petrification grants, and a petrified creature reduced to 0 hit points shatters and dies."
     ],
     "actions": [
       {
@@ -1160,8 +1175,8 @@
     "imm": [],
     "cond": [],
     "traits": [
-      "Toxic Logistics. Auntie units within 10 ft. gain resistance to acid as well as poison.",
-      "Prepared Antivenom. Once per round, when an Auntie ally within 30 ft. fails a poison save, the Alchemist can allow it to reroll."
+      "Toxic Logistics. Auntie allies within 10 ft. of the Alchemist have resistance to acid damage, and any of them that already resist poison damage can't be poisoned.",
+      "Prepared Antivenom. Once per round, when an Auntie ally within 30 ft. that the Alchemist can see fails a Constitution saving throw (including a concentration check), the Alchemist can let it reroll the save; the ally must use the new roll."
     ],
     "actions": [
       {
@@ -1322,7 +1337,7 @@
       {
         "name": "Filthy Stitching",
         "kind": "utility",
-        "text": "One allied Gaga unit within 5 ft. regains 3d8+4 HP. A creature can benefit once per short rest."
+        "text": "One allied Gaga unit within 5 ft. whose Regeneration is suppressed by acid or fire regains the use of it immediately and regains 2d8 hit points."
       }
     ],
     "legendary": [],
@@ -1447,7 +1462,7 @@
       {
         "name": "Scintillating Pulse",
         "kind": "save",
-        "text": "Creatures of Gaga's choice within 15 ft. make Constitution save or are blinded until start of Warbeast's next turn.",
+        "text": "Creatures of the warbeast's choice within 15 ft. make a Constitution save or are blinded until the start of the warbeast's next turn.",
         "dc": 15,
         "ability": "con"
       }
@@ -1800,9 +1815,9 @@
         "reach": 10
       },
       {
-        "name": "Poison Breath",
+        "name": "Poison Breath (Recharge 5-6)",
         "kind": "save",
-        "text": "60-ft cone; Constitution save for half.",
+        "text": "Valdershmort exhales venom in a 60-foot cone. Each creature in the area makes a Constitution saving throw, taking 22d6 poison damage on a failure or half on a success.",
         "dc": 20,
         "ability": "con",
         "damage": [

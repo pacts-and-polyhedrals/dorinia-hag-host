@@ -29,7 +29,7 @@ TOOLS = ROOT / "tools"
 
 # ---------------------------------------------------------------- release config
 MODULE_ID = "dorinia-hag-host"
-VERSION = "1.3.0"
+VERSION = "1.3.1"
 GH_OWNER = "pacts-and-polyhedrals"
 GH_REPO = MODULE_ID
 GH = f"https://github.com/{GH_OWNER}/{GH_REPO}"
@@ -48,7 +48,7 @@ FACTIONS = {
 # Legendary actions that re-use an existing action of the same creature.
 LEGENDARY_REFS = {
     ("Mama Yagha", "Venomous Bite"): ["Venomous Bite"],
-    ("Gahgah Yagha", "Multiattack"): ["Claw and Seize", "Bite"],
+    ("Gahgah Yagha", "Rend"): ["Claw and Seize", "Bite"],
     ("Gahgah Yagha", "Enraging Howl"): ["Enraging Howl"],
     ("Grandma's Walking Hut", "Slam Attack"): ["Slam"],
     ("Valdershmort", "Bite"): ["Bite"],
@@ -299,7 +299,10 @@ def roll_line_save(dc, ability, damage, on_save):
 def build_action(actor_key, short_name, act, sort):
     item_key = f"{actor_key}|{act['name']}"
     per_day = parse_per_day(act["name"])
+    rech = re.search(r"\(Recharge (\d)", act["name"])
     uses = {"spent": 0, "max": str(per_day), "recovery": [{"period": "day", "type": "recoverAll", "formula": ""}]} if per_day else None
+    if rech:
+        uses = {"spent": 0, "max": "1", "recovery": [{"period": "recharge", "type": "recoverAll", "formula": rech.group(1)}]}
     activities, effects = {}, []
     body = f"<p>{esc(act['text'])}</p>"
     text = act["text"]
@@ -331,7 +334,7 @@ def build_action(actor_key, short_name, act, sort):
         activities[aid] = a
         body = roll_line_save(act["dc"], act["ability"], dmg, on_save) + body
     else:
-        heal = re.search(r"regains (\d+d\d+(?:\s*\+\s*\d+)?) HP", text)
+        heal = re.search(r"regains (\d+d\d+(?:\s*\+\s*\d+)?) (?:HP|hit points)", text)
         if heal:
             aid = did(item_key, "act", "heal")
             a = activity_base(aid, "heal", act["name"], rng=range_from_text(text, 5), target_type="ally", uses=bool(uses))
@@ -466,12 +469,12 @@ from spell_data import CASTERS, COVEN, COVEN_MEMBERS, HOMEBREW, LISTS  # noqa: E
 SPELL_PACK = "hag-host-spells"
 SRD_DIR = SOURCE / "srd-spells"
 HB_IMG_FROM = {
-    "Coven's Rot": "ray-of-enfeeblement", "Archfey Drain": "vampiric-touch", "Hag-Ring of Highforest": "fear",
-    "Soul Lantern Siphon": "vampiric-touch", "Grandma's Lullaby": "sleep", "Hollow the Name": "feeblemind",
+    "Coven's Rot": "ray-of-enfeeblement", "Archfey Drain": "vampiric-touch", "Hag-Ring of Highforest": "phantasmal-killer",
+    "Soul Lantern Siphon": "vampiric-touch", "Grandma's Lullaby": "hideous-laughter", "Hollow the Name": "feeblemind",
     "Viper's Kiss": "poison-spray", "Coils of the Mother Serpent": "hold-person", "Gorgon Bloom": "flesh-to-stone",
-    "Twin-Throat Bellow": "thunderwave", "Troll-Blood Boil": "stoneskin", "Earthshaker Stomp": "shatter",
+    "Twin-Throat Bellow": "shatter", "Troll-Blood Boil": "stoneskin", "Earthshaker Stomp": "shatter",
     "Rotbriar Hex": "bestow-curse", "Gorgon's Glance": "flesh-to-stone", "Venomwell Bomb": "stinking-cloud",
-    "Gut-Stitch": "cure-wounds",
+    "Gut-Stitch": "aid",
 }
 SPELL_FOLDERS = {
     "Coven": ("Yagha Coven — Shared Spells", "#4b2a5c", 100000),
@@ -544,7 +547,7 @@ def homebrew_spell(name):
     activities = {aid: act}
     for f, t in sp.get("rider", []):
         rid = did(key, "spellact", "rider")
-        r = activity_base(rid, "damage", "Ring Torment (start of turn)", activation="special", rng=None)
+        r = activity_base(rid, "damage", sp.get("rider_name", "Ring Torment (start of turn)"), activation="special", rng=None)
         r["range"] = {"override": False, "value": "", "units": "", "special": ""}
         r["target"]["affects"] = {"count": "1", "type": "creature", "choice": False, "special": ""}
         r["consumption"]["spellSlot"] = False
