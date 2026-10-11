@@ -1,0 +1,137 @@
+[
+  {
+    "faction": "Grandma",
+    "actors": [
+      {
+        "name": "Babha Yagha \u2014 Grandma, Malevolent Matriarch",
+        "cr": 22,
+        "role": "Supreme controller / soul attrition"
+      },
+      {
+        "name": "Grandma Darkling Knife",
+        "cr": 1,
+        "role": "Scout / executioner"
+      },
+      {
+        "name": "Grandma Darkling Knight",
+        "cr": 4,
+        "role": "Line cavalry / flanker"
+      },
+      {
+        "name": "Berbalang Secret-Eater",
+        "cr": 5,
+        "role": "Flying artillery / anti-caster"
+      },
+      {
+        "name": "Rotbriar Hexer",
+        "cr": 3,
+        "role": "Hex support / debuffer"
+      },
+      {
+        "name": "Soul-Cage Porter",
+        "cr": 6,
+        "role": "Tank / soul battery"
+      },
+      {
+        "name": "Thorn-Memory Stalker",
+        "cr": 4,
+        "role": "Ambusher / zone denial"
+      },
+      {
+        "name": "Grandma's Flying Cauldron",
+        "cr": 9,
+        "role": "Mobile artillery / transport"
+      },
+      {
+        "name": "Grandma's Walking Hut",
+        "cr": 16,
+        "role": "Siege engine / command bastion"
+      }
+    ]
+  },
+  {
+    "faction": "Auntie",
+    "actors": [
+      {
+        "name": "Mama Yagha \u2014 Auntie, Venomous Fang",
+        "cr": 15,
+        "role": "Poison commander / petrification"
+      },
+      {
+        "name": "Yuan-ti Fangguard",
+        "cr": 3,
+        "role": "Shield infantry / poison setup"
+      },
+      {
+        "name": "Coil Adept",
+        "cr": 4,
+        "role": "Controller / grappler"
+      },
+      {
+        "name": "Spitebow Venom Archer",
+        "cr": 3,
+        "role": "Ranged focus fire"
+      },
+      {
+        "name": "Petrifying Eye Acolyte",
+        "cr": 5,
+        "role": "Save pressure / petrify support"
+      },
+      {
+        "name": "Basilisk Chainmaster",
+        "cr": 4,
+        "role": "Monster handler / command support"
+      },
+      {
+        "name": "Venomwell Alchemist",
+        "cr": 5,
+        "role": "Artillery / area denial"
+      },
+      {
+        "name": "Valdershmort \u2014 Auntie's Greater Basilisk",
+        "cr": 14,
+        "role": "Petrification monster / mount"
+      }
+    ]
+  },
+  {
+    "faction": "Gaga",
+    "actors": [
+      {
+        "name": "Gahgah Yagha \u2014 Gaga, Tenebrous Troll",
+        "cr": 18,
+        "role": "Shock commander / grapple breaker"
+      },
+      {
+        "name": "Troll Linebreaker",
+        "cr": 5,
+        "role": "Heavy infantry / breach"
+      },
+      {
+        "name": "Troll Flesh-Mender",
+        "cr": 4,
+        "role": "Sustain support / healer"
+      },
+      {
+        "name": "Darkling Snail Lancer",
+        "cr": 5,
+        "role": "Mounted cavalry / anti-magic screen"
+      },
+      {
+        "name": "Flail Snail Warbeast",
+        "cr": 6,
+        "role": "Magic screen / siege mount"
+      },
+      {
+        "name": "Spider-Rider Harrier",
+        "cr": 3,
+        "role": "Skirmisher / pursuit"
+      },
+      {
+        "name": "Rage-Drum Goblin",
+        "cr": 2,
+        "role": "Morale / command support"
+      }
+    ]
+  }
+]
