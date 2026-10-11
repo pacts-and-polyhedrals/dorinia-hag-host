@@ -1,0 +1,7 @@
+{
+  "name": "dorinia-hag-host",
+  "private": true,
+  "type": "module",
+  "scripts": { "build": "python3 tools/build_module.py && python3 tools/validate_module.py" },
+  "devDependencies": { "@foundryvtt/foundryvtt-cli": "3.0.5" }
+}

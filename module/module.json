@@ -1,0 +1,89 @@
+{
+  "id": "dorinia-hag-host",
+  "title": "Doorinia: The Yagha Coven War Host",
+  "description": "Three High Hags and their coordinated armies, rebuilt from their Highforest origins for the conquered Domain of Delight of Doorinia. 24 dnd5e stat blocks (3 boss hags, 18 army units, 3 signature war assets) with native Activities, condition effects and legendary-action automation, plus a GM tactics journal.",
+  "version": "1.1.0",
+  "compatibility": {
+    "minimum": "14",
+    "verified": "14"
+  },
+  "authors": [
+    {
+      "name": "Asmo — Pacts & Polyhedrals",
+      "url": "https://www.patreon.com/pactsandpolyhedrals",
+      "flags": {
+        "startplaying": "dmasmo"
+      }
+    },
+    {
+      "name": "Ben Vale"
+    }
+  ],
+  "relationships": {
+    "systems": [
+      {
+        "id": "dnd5e",
+        "type": "system",
+        "compatibility": {
+          "minimum": "5.3.3",
+          "verified": "5.3.3"
+        }
+      }
+    ]
+  },
+  "esmodules": [
+    "scripts/dorinia-hag-host.js"
+  ],
+  "packs": [
+    {
+      "name": "hag-host-actors",
+      "label": "Yagha Coven War Host — Actors",
+      "path": "packs/hag-host-actors",
+      "type": "Actor",
+      "system": "dnd5e",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    },
+    {
+      "name": "hag-host-journal",
+      "label": "Yagha Coven War Host — GM Guide",
+      "path": "packs/hag-host-journal",
+      "type": "JournalEntry",
+      "ownership": {
+        "PLAYER": "NONE",
+        "ASSISTANT": "OWNER"
+      }
+    }
+  ],
+  "packFolders": [
+    {
+      "name": "Pacts & Polyhedrals",
+      "sorting": "m",
+      "color": "#3b1f4a",
+      "packs": [],
+      "folders": [
+        {
+          "name": "Doorinia: Yagha Coven War Host",
+          "sorting": "a",
+          "color": "#4b2a5c",
+          "packs": [
+            "hag-host-actors",
+            "hag-host-journal"
+          ]
+        }
+      ]
+    }
+  ],
+  "languages": [],
+  "url": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host",
+  "manifest": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/releases/latest/download/module.json",
+  "download": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/releases/download/v1.1.0/dorinia-hag-host.zip",
+  "bugs": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/issues",
+  "readme": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/blob/main/README.md",
+  "changelog": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/blob/main/CHANGELOG.md",
+  "flags": {
+    "allowBugReporter": false
+  }
+}
