@@ -29,7 +29,7 @@ TOOLS = ROOT / "tools"
 
 # ---------------------------------------------------------------- release config
 MODULE_ID = "dorinia-hag-host"
-VERSION = "1.1.0"
+VERSION = "1.2.0"
 GH_OWNER = "pacts-and-polyhedrals"
 GH_REPO = MODULE_ID
 GH = f"https://github.com/{GH_OWNER}/{GH_REPO}"
@@ -94,6 +94,18 @@ def did(*parts: str) -> str:
 
 def esc(s: str) -> str:
     return html.escape(str(s or ""), quote=False)
+
+
+def art_slug(name: str) -> str:
+    return re.sub(r"[^a-z0-9]+", "-", name.split(" — ")[0].lower().replace("'", "")).strip("-")
+
+
+def portrait(name):
+    return f"modules/{MODULE_ID}/assets/portraits/{art_slug(name)}.webp"
+
+
+def token(name):
+    return f"modules/{MODULE_ID}/assets/tokens/{art_slug(name)}.webp"
 
 
 def short(name: str) -> str:
@@ -498,7 +510,7 @@ def build_actor(m, folder_id, sort):
 
     actor = {
         "_id": aid, "_key": f"!actors!{aid}", "name": m["name"], "type": "npc",
-        "img": "icons/svg/mystery-man.svg", "folder": folder_id, "sort": sort,
+        "img": portrait(m["name"]), "folder": folder_id, "sort": sort,
         "system": {
             "abilities": abilities,
             "skills": skills,
@@ -535,7 +547,7 @@ def build_actor(m, folder_id, sort):
         "prototypeToken": {
             "name": sname, "displayName": 20, "disposition": -1, "actorLink": False,
             "width": tsize, "height": tsize,
-            "texture": {"src": "icons/svg/mystery-man.svg", "scaleX": 1, "scaleY": 1},
+            "texture": {"src": token(m["name"]), "scaleX": 1, "scaleY": 1},
             "bar1": {"attribute": "attributes.hp"}, "bar2": {"attribute": None}, "displayBars": 20,
             "sight": {"enabled": False},
         },

@@ -11,6 +11,9 @@ Three High Hags and their coordinated armies, rebuilt from their Highforest orig
   - **Gaga — Gahgah Yagha** (CR 18): Troll Linebreaker, Troll Flesh-Mender, Darkling Snail Lancer, Flail Snail Warbeast, Spider-Rider Harrier, Rage-Drum Goblin
 - **Yagha Coven War Host — GM Guide** compendium: doctrine, synergies, clickable rosters with CR/XP, wave structure, Foundry notes.
 
+## Art
+Every creature has a portrait and a round faction-ringed token in a grotesque-chibi gothic comic style. Replacement prompts are in `ART-PROMPTS.md`.
+
 ## Automation (no Midi-QOL / DAE required)
 - Native dnd5e Activities for every attack, save, heal and utility action.
 - Condition riders (frightened, poisoned, restrained, prone, stunned, blinded, petrified, grappled) ship as Active Effects you apply from the chat card.

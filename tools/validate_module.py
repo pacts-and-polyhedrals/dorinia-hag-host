@@ -68,6 +68,10 @@ for a in actors:
             if k not in K["damage"]: err(f"{n}: {f} {k}")
     for k in s["traits"]["ci"]["value"]:
         if k not in K["conditions"]: err(f"{n}: ci {k}")
+    for pth in (a["img"], a["prototypeToken"]["texture"]["src"]):
+        local = MODULE / pth.replace("modules/dorinia-hag-host/", "")
+        if not local.is_file(): err(f"{n}: missing art {pth}")
+        if pth.replace("modules/dorinia-hag-host/", "") not in names: err(f"{n}: art not in zip {pth}")
     has_leg = False
     for it in a["items"]:
         counts["items"] += 1

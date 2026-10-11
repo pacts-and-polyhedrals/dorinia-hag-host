@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.2.0
+- **Art:** all 24 creatures now have a portrait (1000×1000) and a round faction-ringed token (512×512) in a grotesque-chibi gothic comic style: purple for Grandma's host, green for Auntie's, rust for Gaga's.
+- Actor portraits and prototype tokens point at the new art (`assets/portraits`, `assets/tokens`).
+- `ART-PROMPTS.md`: a ready-to-use image prompt for every creature, so painterly replacements can be dropped in under the same filenames.
+
 ## 1.1.0
 Full rebuild. Fixes installation on The Forge and Foundry (1.0.0 shipped with an empty manifest/download URL and a wrapped zip).
 
