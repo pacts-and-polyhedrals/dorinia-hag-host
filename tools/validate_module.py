@@ -81,6 +81,8 @@ for a in actors:
             for st in e["statuses"]:
                 if st not in K["conditions"]: err(f"{n}/{it['name']}: status {st}")
         strict = it["type"] == "feat"
+        ipath = it.get("img", "").replace("modules/dorinia-hag-host/", "")
+        if not ipath.startswith("assets/icons/") or ipath not in names: err(f"{n}/{it['name']}: icon missing ({ipath})")
         if it["type"] == "spell":
             counts["spells"] = counts.get("spells", 0) + 1
             if it["system"].get("method") not in ("spell", "innate", "atwill"): err(f"{n}/{it['name']}: spell method")

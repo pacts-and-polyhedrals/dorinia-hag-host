@@ -6,6 +6,7 @@ PAL = {
     "Grandma": {"bg1": "#2a1638", "bg2": "#07040c", "glow": "#7fc8ff", "accent": "#8a4fb8", "ring": "#6b3a8f"},
     "Auntie": {"bg1": "#13302a", "bg2": "#030807", "glow": "#9dff3a", "accent": "#c9d43a", "ring": "#3f7a2a"},
     "Gaga": {"bg1": "#4a1a10", "bg2": "#0c0403", "glow": "#ff6a2a", "accent": "#c0392b", "ring": "#8a3a1e"},
+    "Coven": {"bg1": "#2e2814", "bg2": "#060503", "glow": "#ffd56a", "accent": "#c9a83a", "ring": "#9a7a2a"},
 }
 
 
@@ -143,6 +144,7 @@ def grandma():
 from c_grandma import *  # noqa
 from c_auntie import *  # noqa
 from c_gaga import *  # noqa
+from c_new import *  # noqa
 
 CREATURES = {
     "babha-yagha": ("Grandma", grandma),
@@ -169,4 +171,22 @@ CREATURES = {
     "flail-snail-warbeast": ("Gaga", flail_snail),
     "spider-rider-harrier": ("Gaga", spider_rider),
     "rage-drum-goblin": ("Gaga", rage_drum),
+    "quickling-thief": ("Grandma", quickling_thief),
+    "quickling-assassin": ("Grandma", quickling_assassin),
+    "darkling-lantern-snuffer": ("Grandma", lantern_snuffer),
+    "soul-moth-swarm": ("Grandma", soul_moth_swarm),
+    "yuan-ti-foot-soldier": ("Auntie", foot_soldier),
+    "yuan-ti-broodling-slinger": ("Auntie", broodling_slinger),
+    "stone-scale-adder": ("Auntie", stone_adder),
+    "basilisk-hatchling": ("Auntie", basilisk_hatchling),
+    "goblin-bone-thrower": ("Gaga", bone_thrower),
+    "troll-whelp": ("Gaga", troll_whelp),
+    "bugbear-sack-snatcher": ("Gaga", bugbear),
+    "ogre-log-ram": ("Gaga", ogre_log_ram),
+    "coven-crow": ("Coven", coven_crow),
+    "hollow-hound": ("Coven", hollow_hound),
+    "coven-toad": ("Coven", coven_toad),
+    "petrified-thrall": ("Coven", petrified_thrall),
+    "coven-bogle": ("Coven", coven_bogle),
+    "archfey-husk": ("Coven", archfey_husk),
 }

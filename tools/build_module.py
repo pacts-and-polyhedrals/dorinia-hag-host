@@ -29,7 +29,7 @@ TOOLS = ROOT / "tools"
 
 # ---------------------------------------------------------------- release config
 MODULE_ID = "dorinia-hag-host"
-VERSION = "1.3.1"
+VERSION = "1.4.0"
 GH_OWNER = "pacts-and-polyhedrals"
 GH_REPO = MODULE_ID
 GH = f"https://github.com/{GH_OWNER}/{GH_REPO}"
@@ -43,6 +43,7 @@ FACTIONS = {
     "Grandma": {"folder": "Grandma — Babha Yagha", "color": "#4b2a5c", "sort": 100000},
     "Auntie": {"folder": "Auntie — Mama Yagha", "color": "#2f5a2a", "sort": 200000},
     "Gaga": {"folder": "Gaga — Gahgah Yagha", "color": "#6b3a1e", "sort": 300000},
+    "Coven": {"folder": "Yagha Coven — Sworn Host", "color": "#7a6a2a", "sort": 400000},
 }
 
 # Legendary actions that re-use an existing action of the same creature.
@@ -308,7 +309,7 @@ def build_action(actor_key, short_name, act, sort):
     text = act["text"]
 
     if act["kind"] == "attack":
-        aid, a = attack_activity(item_key, act)
+        aid, a = attack_activity(item_key, act, activation=act.get("activation", "action"))
         conds = [c for c in parse_conditions(text) if c in ("grappled", "restrained", "prone", "poisoned")]
         rider = parse_save(text)
         if conds and not rider:
@@ -330,7 +331,7 @@ def build_action(actor_key, short_name, act, sort):
         conds = parse_conditions(text)
         effects = [status_effect(item_key, c, condition_rounds(text)) for c in conds]
         aid, a = save_activity(item_key, act["name"], text, act["dc"], act["ability"], dmg, on_save, effects,
-                               activation="action", uses=bool(uses))
+                               activation=act.get("activation", "action"), uses=bool(uses))
         activities[aid] = a
         body = roll_line_save(act["dc"], act["ability"], dmg, on_save) + body
     else:
@@ -342,7 +343,7 @@ def build_action(actor_key, short_name, act, sort):
             body = f"<p><em>Healing:</em> [[/heal {heal.group(1).replace(' ', '')}]]</p>" + body
         else:
             aid = did(item_key, "act", "utility")
-            a = activity_base(aid, "utility", act["name"], rng=range_from_text(text), target_type="", target_count="",
+            a = activity_base(aid, "utility", act["name"], activation=act.get("activation", "action"), rng=range_from_text(text), target_type="", target_count="",
                               uses=bool(uses))
             a["roll"] = {"formula": "", "name": "", "prompt": False, "visible": False}
             summon = re.search(r"Summon (\d+d\d+(?:\+\d+)?)", text)
@@ -686,6 +687,7 @@ def spells_pack_docs():
         d["folder"] = fids[HOMEBREW[s]["owner"]] if s in HOMEBREW else fids["SRD"]
         d["system"]["method"] = "spell"
         d["system"]["prepared"] = 0
+        d["img"] = icon_for(d, "spell")
         d["_key"] = f"!items!{d['_id']}"
         for e in d.get("effects", []):
             e["_key"] = f"!items.effects!{d['_id']}.{e['_id']}"
@@ -722,6 +724,27 @@ def spellbook_page():
     return "".join(html_)
 
 
+
+# ---------------------------------------------------------------- icons
+ICON_NEEDS = {}
+
+
+def icon_slug(name):
+    base = re.sub(r"\s*\((?:costs|recharge|\d+/day)[^)]*\)", "", name, flags=re.I)
+    return re.sub(r"[^a-z0-9]+", "-", base.lower().replace("'", "")).strip("-")
+
+
+def icon_for(item, faction):
+    if item["type"] == "spell":
+        key = f"spell-{icon_slug(item['name'])}"
+        pal = "school-" + item["system"].get("school", "evo")
+    else:
+        key = f"{faction.lower()}-{icon_slug(item['name'])}"
+        pal = faction
+    desc = re.sub(r"<[^>]+>", " ", item["system"]["description"]["value"])[:600]
+    ICON_NEEDS.setdefault(key, {"name": item["name"], "pal": pal, "text": desc, "kind": item["type"]})
+    return f"modules/{MODULE_ID}/assets/icons/{key}.webp"
+
 # ---------------------------------------------------------------- actors
 def build_actor(m, folder_id, sort):
     actor_key = m["name"]
@@ -755,6 +778,7 @@ def build_actor(m, folder_id, sort):
 
     # embedded keys for the CLI
     for it in items:
+        it["img"] = icon_for(it, m["faction"])
         it["_key"] = f"!actors.items!{aid}.{it['_id']}"
         for e in it["effects"]:
             e["_key"] = f"!actors.items.effects!{aid}.{it['_id']}.{e['_id']}"
@@ -773,7 +797,8 @@ def build_actor(m, folder_id, sort):
     size = m["size"]
     tsize = TOKEN_SIZE.get(size, 1)
     bio = (f"<p><strong>Army role:</strong> {esc(m['role'])}</p>"
-           f"<p><strong>Host:</strong> {esc(FACTIONS[m['faction']]['folder'])}</p>"
+           f"<p><strong>Host:</strong> {esc(FACTIONS[m['faction']]['folder'])}"
+           + (f" (supplied by {esc(m['supplier'])})" if m.get("supplier") else "") + "</p>"
            + (f"<p>{esc(m['desc'])}</p>" if m.get("desc") else ""))
 
     actor = {
@@ -794,7 +819,7 @@ def build_actor(m, folder_id, sort):
             },
             "details": {
                 "cr": m["cr"], "alignment": "Chaotic Evil" if m["type"] != "construct" else "Unaligned",
-                "type": {"value": m["type"], "subtype": m.get("subtype", "").title(), "swarm": "", "custom": ""},
+                "type": {"value": m["type"], "subtype": m.get("subtype", "").title(), "swarm": m.get("swarm", ""), "custom": ""},
                 "biography": {"value": bio, "public": ""},
                 "habitat": {"value": [], "custom": "Doorinia"}, "treasure": {"value": []},
             },
@@ -835,8 +860,10 @@ def actor_uuid(name):
 def faction_table(creatures, faction):
     rows = []
     for m in sorted([c for c in creatures if c["faction"] == faction], key=lambda c: -c["cr"]):
-        rows.append(f"<tr><td>@UUID[{actor_uuid(m['name'])}]{{{esc(m['name'])}}}</td><td>{m['cr']}</td>"
-                    f"<td>{CR_XP.get(m['cr'], 0):,}</td><td>{m['ac']}</td><td>{m['hp']}</td><td>{esc(m['role'])}</td></tr>")
+        crs = {0.125: "1/8", 0.25: "1/4", 0.5: "1/2"}.get(m["cr"], m["cr"])
+        role = esc(m["role"]) + (f" <em>(from {esc(m['supplier'])})</em>" if m.get("supplier") else "")
+        rows.append(f"<tr><td>@UUID[{actor_uuid(m['name'])}]{{{esc(m['name'])}}}</td><td>{crs}</td>"
+                    f"<td>{CR_XP.get(m['cr'], 0):,}</td><td>{m['ac']}</td><td>{m['hp']}</td><td>{role}</td></tr>")
     return ("<table><thead><tr><th>Unit</th><th>CR</th><th>XP</th><th>AC</th><th>HP</th><th>Role</th></tr></thead>"
             f"<tbody>{''.join(rows)}</tbody></table>")
 
@@ -888,6 +915,18 @@ def build_journal(creatures):
 </ul>
 {faction_table(creatures, 'Gaga')}
 """),
+        ("The Sworn Host", f"""
+<h2>Yagha Coven — the Sworn Host</h2>
+<p>Each hag keeps her own household troops, but each also pledges two kinds of servant to the <strong>coven as a whole</strong>. Any of the three hags may command a sworn unit, and sworn units count as allies of all three hosts for every trait that refers to "Grandma units", "Auntie allies" or "Gaga allies".</p>
+<ul>
+<li><strong>From Grandma:</strong> Coven Crows (the coven's eyes) and Hollow Hounds (hunting anyone who has lost a piece of their soul).</li>
+<li><strong>From Auntie:</strong> Coven Toads (bog mounts with hallucinogenic skin) and Petrified Thralls (stone grapplers that set victims up for petrification).</li>
+<li><strong>From Gaga:</strong> Coven Bogles (turn any field into a swamp) and Archfey Husks (drained courtiers the hags burn to power coven spells).</li>
+</ul>
+{faction_table(creatures, 'Coven')}
+<h3>Low-level household troops (CR 1/4–3)</h3>
+<p><strong>Grandma:</strong> Quickling Thief, Quickling Assassin, Darkling Lantern-Snuffer, Soul-Moth Swarm. <strong>Auntie:</strong> Yuan-ti Foot Soldier, Yuan-ti Broodling Slinger, Stone-Scale Adder, Basilisk Hatchling. <strong>Gaga:</strong> Goblin Bone-Thrower, Troll Whelp, Bugbear Sack-Snatcher, Ogre Log-Ram. These let the coven threaten low-level parties long before the hags themselves appear.</p>
+"""),
         ("Combined-Army Waves", """
 <h2>Recommended Combined-Army Wave</h2>
 <p>Start with scouts/skirmishers, then a control layer, then the heavy line, and only then reveal the hag. Mixing factions works best when Grandma supplies control, Auntie supplies poison/petrification, and Gaga supplies forced movement and finishers.</p>
@@ -903,7 +942,7 @@ def build_journal(creatures):
         ("Foundry Notes", f"""
 <h2>Using this module in Foundry</h2>
 <ul>
-<li>All 24 stat blocks live in the <strong>Yagha Coven War Host — Actors</strong> compendium, foldered by host. Drag any actor onto a scene, or use <em>Import All Content</em> from the compendium's context menu.</li>
+<li>All {len(creatures)} stat blocks live in the <strong>Yagha Coven War Host — Actors</strong> compendium, foldered by host. Drag any actor onto a scene, or use <em>Import All Content</em> from the compendium's context menu.</li>
 <li>On first load as GM you're offered a one-click import into a world folder. You can run it later from the console: <code>game.modules.get("{MODULE_ID}").api.importAll()</code>.</li>
 <li>Attacks and saves are native dnd5e Activities. Saves that inflict conditions carry Active Effects you can apply from the chat card.</li>
 <li>Legendary actions consume the creature's legendary action pool automatically; all three hags have Legendary Resistance (3/Day), which consumes their legendary resistance pool.</li>
@@ -932,7 +971,7 @@ def manifest():
     return {
         "id": MODULE_ID,
         "title": "Doorinia: The Yagha Coven War Host",
-        "description": "Three High Hags and their coordinated armies, rebuilt from their Highforest origins for the conquered Domain of Delight of Doorinia. 24 dnd5e stat blocks (3 boss hags, 18 army units, 3 signature war assets) with native Activities, condition effects and legendary-action automation, plus a GM tactics journal.",
+        "description": "Three High Hags and their coordinated armies, rebuilt from their Highforest origins for the conquered Domain of Delight of Doorinia. 42 dnd5e stat blocks (3 boss hags, 36 army units from CR 1/4 to 16, 3 signature war assets) with native Activities, condition effects and legendary-action automation, plus a GM tactics journal.",
         "version": VERSION,
         "compatibility": {"minimum": "14", "verified": "14"},
         "authors": [
@@ -996,6 +1035,7 @@ def main():
     write_docs(BUILD / ACTOR_PACK, actors + folders)
     write_docs(BUILD / JOURNAL_PACK, [build_journal(creatures)])
     write_docs(BUILD / SPELL_PACK, spells_pack_docs())
+    (ROOT / "build" / "icons.json").write_text(json.dumps(ICON_NEEDS, indent=1, ensure_ascii=False), encoding="utf-8")
 
     (MODULE / "module.json").write_text(json.dumps(manifest(), indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
 

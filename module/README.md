@@ -5,7 +5,7 @@
 Three High Hags and their coordinated armies, rebuilt from their Highforest origins for the conquered Domain of Delight of Doorinia.
 
 ## Contents
-- **Yagha Coven War Host — Actors** compendium (24 NPCs, foldered by host)
+- **Yagha Coven War Host — Actors** compendium (42 NPCs from CR 1/4 to 22, foldered by host plus the coven's Sworn Host)
   - **Grandma — Babha Yagha** (CR 22): Darkling Knife & Knight, Berbalang Secret-Eater, Rotbriar Hexer, Soul-Cage Porter, Thorn-Memory Stalker, Grandma's Flying Cauldron, Grandma's Walking Hut
   - **Auntie — Mama Yagha** (CR 15): Yuan-ti Fangguard, Coil Adept, Spitebow Venom Archer, Petrifying Eye Acolyte, Basilisk Chainmaster, Venomwell Alchemist, Valdershmort
   - **Gaga — Gahgah Yagha** (CR 18): Troll Linebreaker, Troll Flesh-Mender, Darkling Snail Lancer, Flail Snail Warbeast, Spider-Rider Harrier, Rage-Drum Goblin
@@ -13,7 +13,7 @@ Three High Hags and their coordinated armies, rebuilt from their Highforest orig
 - **Yagha Coven War Host — GM Guide** compendium: doctrine, synergies, clickable rosters with CR/XP, wave structure, Foundry notes.
 
 ## Art
-Every creature has a portrait and a round faction-ringed token in a grotesque-chibi gothic comic style. Replacement prompts are in `ART-PROMPTS.md`.
+Every creature has a portrait and a round faction-ringed token, and every ability and spell has its own ink-style icon, in a grotesque-chibi gothic comic style. Replacement prompts are in `ART-PROMPTS.md`.
 
 ## Automation (no Midi-QOL / DAE required)
 - Native dnd5e Activities for every attack, save, heal and utility action.

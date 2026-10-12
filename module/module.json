@@ -1,8 +1,8 @@
 {
   "id": "dorinia-hag-host",
   "title": "Doorinia: The Yagha Coven War Host",
-  "description": "Three High Hags and their coordinated armies, rebuilt from their Highforest origins for the conquered Domain of Delight of Doorinia. 24 dnd5e stat blocks (3 boss hags, 18 army units, 3 signature war assets) with native Activities, condition effects and legendary-action automation, plus a GM tactics journal.",
-  "version": "1.3.1",
+  "description": "Three High Hags and their coordinated armies, rebuilt from their Highforest origins for the conquered Domain of Delight of Doorinia. 42 dnd5e stat blocks (3 boss hags, 36 army units from CR 1/4 to 16, 3 signature war assets) with native Activities, condition effects and legendary-action automation, plus a GM tactics journal.",
+  "version": "1.4.0",
   "compatibility": {
     "minimum": "14",
     "verified": "14"
@@ -91,7 +91,7 @@
   "languages": [],
   "url": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host",
   "manifest": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/releases/latest/download/module.json",
-  "download": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/releases/download/v1.3.1/dorinia-hag-host.zip",
+  "download": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/releases/download/v1.4.0/dorinia-hag-host.zip",
   "bugs": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/issues",
   "readme": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/blob/main/README.md",
   "changelog": "https://github.com/pacts-and-polyhedrals/dorinia-hag-host/blob/main/CHANGELOG.md",

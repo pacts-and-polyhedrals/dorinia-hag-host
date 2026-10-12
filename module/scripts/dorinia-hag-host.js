@@ -66,7 +66,7 @@ Hooks.once("ready", async () => {
   if (!isImported() && !game.settings.get(ID, "promptShown")) {
     const yes = await DialogV2.confirm({
       window: { title: TITLE },
-      content: `<p>Import the <strong>24 Yagha Coven stat blocks</strong> and the <strong>GM Guide</strong> into this world?</p>
+      content: `<p>Import the <strong>${game.packs.get(ACTOR_PACK)?.index.size ?? ""} Yagha Coven stat blocks</strong> and the <strong>GM Guide</strong> into this world?</p>
         <p>You can do this any time from <strong>Game Settings → Configure Settings → ${TITLE} → Open Coven Manager</strong>.</p>`,
       rejectClose: false
     });

@@ -1,5 +1,27 @@
 # Changelog
 
+## 1.4.0 — Low-level host, Sworn Host, art for everything
+**18 new units (CR 1/4 to 5).** Each hag gets four household troops of her own plus two units she pledges to the coven.
+
+| Hag | Household (personal) | Pledged to the coven (Sworn Host) |
+|---|---|---|
+| **Grandma** | Quickling Thief (1/2), Quickling Assassin (2), Darkling Lantern-Snuffer (1/4), Soul-Moth Swarm (2) | Coven Crow (1/4), Hollow Hound (3) |
+| **Auntie** | Yuan-ti Foot Soldier (1/2), Yuan-ti Broodling Slinger (1/4), Stone-Scale Adder (1), Basilisk Hatchling (3) | Coven Toad (1), Petrified Thrall (2) |
+| **Gaga** | Goblin Bone-Thrower (1/4), Troll Whelp (2), Bugbear Sack-Snatcher (1), Ogre Log-Ram (3) | Coven Bogle (1/2), Archfey Husk (5) |
+
+- Sworn Host units have their own compendium folder and a gold faction palette. Each one is tagged with the hag who supplies it, and it counts as an ally of all three hosts.
+- All new abilities were built against the same 2014 rules check as 1.3.1. None of them repeats what a condition, a core rule or another ability on the same creature already does.
+- They are designed to combo with the existing host:
+  - Quickling Assassins finish off frightened targets.
+  - Bone-Thrower volleys knock targets prone for Troll Whelps and Gaga's *Break Their Line*.
+  - Petrified Thralls set victims up for Valdershmort.
+  - Archfey Husks raise the save DC of coven spells.
+  - Soul-Moth Swarms silence casters.
+- **Art:** portraits and tokens for all 18 new units in the same style.
+- **Icons:** all 261 abilities and spells now have their own icon in the same ink style, coloured by host for abilities and by school for spells, each with a main motif and a corner emblem. Item icons are in `assets/icons/`.
+- GM Guide: new **Sworn Host** page with a CR/XP roster.
+- `ART-PROMPTS.md`: prompts for the 18 new units.
+
 ## 1.3.1 — Rules audit
 Every trait, action, legendary action and homebrew spell was checked against the 2014 rules and the conditions it references. Anything redundant, contradictory or non-functional was changed.
 

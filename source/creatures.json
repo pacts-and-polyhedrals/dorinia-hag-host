@@ -1835,5 +1835,1190 @@
       "Petrifying Gaze (3). Force one creature to resolve Petrifying Gaze."
     ],
     "desc": ""
+  },
+  {
+    "name": "Quickling Thief",
+    "faction": "Grandma",
+    "role": "Pickpocket / disruptor",
+    "cr": 0.5,
+    "ac": 16,
+    "hp": 10,
+    "size": "tiny",
+    "type": "fey",
+    "subtype": "quickling",
+    "skills": {
+      "slt": 2,
+      "ste": 2,
+      "prc": 1
+    },
+    "traits": [
+      "Blurred Movement. Attack rolls against the quickling have disadvantage unless it is incapacitated or its speed is 0.",
+      "Evasion. If the quickling is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage on a success and only half damage on a failure."
+    ],
+    "actions": [
+      {
+        "name": "Pilfering Dagger",
+        "kind": "attack",
+        "text": "A needle-thin blade aimed at purse strings and fingers.",
+        "tohit": 8,
+        "damage": [
+          [
+            "1d4+6",
+            "piercing"
+          ]
+        ],
+        "reach": 5
+      },
+      {
+        "name": "Snatch",
+        "kind": "save",
+        "activation": "bonus",
+        "text": "One creature within 5 ft. makes a DC 14 Dexterity saving throw. On a failure, the quickling takes one object weighing 2 lb. or less that the creature is holding or carrying but not wearing (spell focuses, potions, wands and coin purses are favourites).",
+        "dc": 14,
+        "ability": "dex"
+      }
+    ],
+    "desc": "Grandma pays quicklings in stolen birthdays. They pay her back in stolen wands, focuses and holy symbols.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "languages": [
+      "common",
+      "sylvan"
+    ],
+    "v14": true,
+    "speed": {
+      "walk": 120,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 4,
+      "dex": 22,
+      "con": 10,
+      "int": 10,
+      "wis": 12,
+      "cha": 7
+    }
+  },
+  {
+    "name": "Quickling Assassin",
+    "faction": "Grandma",
+    "role": "Skirmisher / fear-finisher",
+    "cr": 2,
+    "ac": 16,
+    "hp": 22,
+    "size": "tiny",
+    "type": "fey",
+    "subtype": "quickling",
+    "skills": {
+      "acr": 1,
+      "ste": 2,
+      "prc": 1
+    },
+    "traits": [
+      "Blurred Movement. Attack rolls against the quickling have disadvantage unless it is incapacitated or its speed is 0.",
+      "Evasion. If the quickling is subjected to an effect that allows it to make a Dexterity saving throw to take only half damage, it instead takes no damage on a success and only half damage on a failure.",
+      "Prey on Fear. Once per turn, when the assassin hits a frightened creature, the attack deals an extra 2d6 piercing damage."
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "kind": "utility",
+        "text": "The assassin makes two Thorn Needle attacks."
+      },
+      {
+        "name": "Thorn Needle",
+        "kind": "attack",
+        "text": "A blackthorn needle dipped in nightmare sap.",
+        "tohit": 8,
+        "damage": [
+          [
+            "1d4+6",
+            "piercing"
+          ]
+        ],
+        "reach": 5
+      }
+    ],
+    "desc": "Where Grandma's gaze lands, the quicklings follow. They only ever stab people who are already screaming.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "languages": [
+      "common",
+      "sylvan"
+    ],
+    "v14": true,
+    "speed": {
+      "walk": 120,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 4,
+      "dex": 22,
+      "con": 14,
+      "int": 10,
+      "wis": 12,
+      "cha": 7
+    }
+  },
+  {
+    "name": "Darkling Lantern-Snuffer",
+    "faction": "Grandma",
+    "role": "Light denial / scout",
+    "cr": 0.25,
+    "ac": 13,
+    "hp": 9,
+    "size": "sm",
+    "type": "fey",
+    "subtype": "darkling",
+    "skills": {
+      "ste": 2,
+      "prc": 1
+    },
+    "traits": [
+      "Light Sensitivity. While in bright light, the darkling has disadvantage on attack rolls, as well as on Wisdom (Perception) checks that rely on sight."
+    ],
+    "actions": [
+      {
+        "name": "Snuffing Hook",
+        "kind": "attack",
+        "text": "A long brass hook made for pinching wicks.",
+        "tohit": 5,
+        "damage": [
+          [
+            "1d6+3",
+            "piercing"
+          ]
+        ],
+        "reach": 10
+      },
+      {
+        "name": "Snuff Light",
+        "kind": "utility",
+        "activation": "bonus",
+        "text": "The darkling extinguishes one nonmagical flame or light source it can see within 30 ft. (a torch, lantern, candle or campfire). A light created by a spell of 2nd level or lower is suppressed until the start of the darkling's next turn instead."
+      }
+    ],
+    "desc": "Every darkling raid opens the same way: one by one, the lamps go out.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "languages": [
+      "common",
+      "sylvan"
+    ],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 9,
+      "dex": 16,
+      "con": 12,
+      "int": 10,
+      "wis": 12,
+      "cha": 10
+    }
+  },
+  {
+    "name": "Soul-Moth Swarm",
+    "faction": "Grandma",
+    "role": "Caster suppression / attrition",
+    "cr": 2,
+    "ac": 12,
+    "hp": 31,
+    "size": "med",
+    "type": "fey",
+    "subtype": "",
+    "swarm": "tiny",
+    "res": [
+      "bludgeoning",
+      "piercing",
+      "slashing"
+    ],
+    "cond": [
+      "charmed",
+      "frightened",
+      "grappled",
+      "paralyzed",
+      "petrified",
+      "prone",
+      "restrained",
+      "stunned"
+    ],
+    "languages": [],
+    "traits": [
+      "Swarm. The swarm can occupy another creature's space and vice versa, and the swarm can move through any opening large enough for a Tiny moth. The swarm can't regain hit points or gain temporary hit points.",
+      "Stolen Breath. A creature that starts its turn in the swarm's space can't speak until the start of its next turn, so it can't cast spells with verbal components."
+    ],
+    "actions": [
+      {
+        "name": "Soul Sip",
+        "kind": "attack",
+        "text": "Hundreds of grey moths settle and drink. The swarm deals only 1d6 necrotic damage if it has half its hit points or fewer.",
+        "tohit": 4,
+        "damage": [
+          [
+            "2d6",
+            "necrotic"
+          ]
+        ],
+        "reach": 5
+      }
+    ],
+    "desc": "Moths that hatched inside Grandma's lantern, made of the soft grey part of a soul that remembers how to talk.",
+    "saves": [],
+    "skills": {},
+    "imm": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 5,
+      "fly": 40,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 3,
+      "dex": 14,
+      "con": 10,
+      "int": 2,
+      "wis": 12,
+      "cha": 6
+    }
+  },
+  {
+    "name": "Coven Crow",
+    "faction": "Coven",
+    "supplier": "Grandma",
+    "role": "Spy / coven eyes",
+    "cr": 0.25,
+    "ac": 12,
+    "hp": 7,
+    "size": "tiny",
+    "type": "beast",
+    "subtype": "",
+    "skills": {
+      "prc": 2
+    },
+    "languages": [],
+    "traits": [
+      "Coven Eyes. While the crow is within 1 mile of a hag of the Yagha Coven, that hag can use a bonus action to see and hear through the crow's senses until the start of her next turn.",
+      "Mimicry. The crow can mimic simple sounds it has heard, such as a person whispering a name or a door creaking. A creature that hears the sounds can tell they are imitations with a successful DC 10 Wisdom (Insight) check."
+    ],
+    "actions": [
+      {
+        "name": "Beak",
+        "kind": "attack",
+        "text": "A stabbing peck at the eyes.",
+        "tohit": 4,
+        "damage": [
+          [
+            "1d4+2",
+            "piercing"
+          ]
+        ],
+        "reach": 5
+      }
+    ],
+    "desc": "Supplied by Grandma. Every hag of the coven can borrow its eyes; none of them ever feeds it.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 10,
+      "fly": 50,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 4,
+      "dex": 15,
+      "con": 10,
+      "int": 6,
+      "wis": 14,
+      "cha": 8
+    }
+  },
+  {
+    "name": "Hollow Hound",
+    "faction": "Coven",
+    "supplier": "Grandma",
+    "role": "Tracker / pursuit",
+    "cr": 3,
+    "ac": 14,
+    "hp": 45,
+    "size": "med",
+    "type": "monstrosity",
+    "subtype": "hag-hound",
+    "skills": {
+      "prc": 2,
+      "ste": 1
+    },
+    "res": [
+      "necrotic"
+    ],
+    "languages": [],
+    "traits": [
+      "Soul Scent. The hound knows the location of any creature within 60 ft. whose hit point maximum is reduced, and such a creature can't hide from it.",
+      "Pack Bound. The hound has advantage on Wisdom (Perception) checks while another Hollow Hound is within 30 ft. of it."
+    ],
+    "actions": [
+      {
+        "name": "Bite",
+        "kind": "attack",
+        "text": "Jaws of grave-cold iron.",
+        "tohit": 5,
+        "damage": [
+          [
+            "2d6+3",
+            "piercing"
+          ],
+          [
+            "1d6",
+            "necrotic"
+          ]
+        ],
+        "reach": 5
+      },
+      {
+        "name": "Grave Howl (Recharge 5-6)",
+        "kind": "save",
+        "text": "Each creature of the hound's choice within 30 ft. that can hear it makes a DC 12 Wisdom saving throw or is frightened of the hound until the end of its next turn.",
+        "dc": 12,
+        "ability": "wis"
+      }
+    ],
+    "desc": "Supplied by Grandma. The hounds hunt whoever has already lost a piece of their soul to the coven.",
+    "saves": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 50,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 16,
+      "dex": 15,
+      "con": 14,
+      "int": 5,
+      "wis": 14,
+      "cha": 6
+    }
+  },
+  {
+    "name": "Yuan-ti Foot Soldier",
+    "faction": "Auntie",
+    "role": "Line infantry / bodyguard",
+    "cr": 0.5,
+    "ac": 15,
+    "hp": 22,
+    "size": "med",
+    "type": "monstrosity",
+    "subtype": "yuan-ti",
+    "res": [
+      "poison"
+    ],
+    "languages": [
+      "common",
+      "yuan-ti"
+    ],
+    "traits": [
+      "Shield Drill. When a creature the foot soldier can see attacks an Auntie ally within 5 ft. of the foot soldier, the foot soldier can use its reaction to impose disadvantage on the attack roll."
+    ],
+    "actions": [
+      {
+        "name": "Spear",
+        "kind": "attack",
+        "text": "A drilled, disciplined thrust.",
+        "tohit": 4,
+        "damage": [
+          [
+            "1d6+2",
+            "piercing"
+          ],
+          [
+            "1d4",
+            "poison"
+          ]
+        ],
+        "reach": 5
+      }
+    ],
+    "desc": "The bulk of Auntie's line: scale-shielded and trained to protect the officer beside them before themselves.",
+    "saves": [],
+    "skills": {},
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 14,
+      "dex": 13,
+      "con": 12,
+      "int": 10,
+      "wis": 10,
+      "cha": 10
+    }
+  },
+  {
+    "name": "Yuan-ti Broodling Slinger",
+    "faction": "Auntie",
+    "role": "Harasser",
+    "cr": 0.25,
+    "ac": 13,
+    "hp": 9,
+    "size": "sm",
+    "type": "monstrosity",
+    "subtype": "yuan-ti",
+    "res": [
+      "poison"
+    ],
+    "skills": {
+      "ste": 1
+    },
+    "languages": [
+      "yuan-ti"
+    ],
+    "traits": [
+      "Slither Away. The broodling can take the Disengage action as a bonus action on each of its turns."
+    ],
+    "actions": [
+      {
+        "name": "Venom-Glob Sling",
+        "kind": "attack",
+        "text": "A wax pellet full of venom. A creature hit must also make a DC 11 Constitution saving throw or be poisoned until the end of its next turn.",
+        "tohit": 4,
+        "damage": [
+          [
+            "1d4+2",
+            "bludgeoning"
+          ]
+        ],
+        "range": 30
+      }
+    ],
+    "desc": "Hatchlings too young for a spear. Auntie gives them slings and the instruction to aim for faces.",
+    "saves": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 8,
+      "dex": 15,
+      "con": 10,
+      "int": 9,
+      "wis": 10,
+      "cha": 8
+    }
+  },
+  {
+    "name": "Stone-Scale Adder",
+    "faction": "Auntie",
+    "role": "Slow-and-poison skirmisher",
+    "cr": 1,
+    "ac": 14,
+    "hp": 22,
+    "size": "med",
+    "type": "beast",
+    "subtype": "",
+    "res": [
+      "poison"
+    ],
+    "languages": [],
+    "traits": [
+      "Calcifying Venom. A creature that takes poison damage from the adder's Bite has its speed halved until the end of its next turn as its limbs stiffen."
+    ],
+    "actions": [
+      {
+        "name": "Bite",
+        "kind": "attack",
+        "text": "Grey fangs, stone-hard.",
+        "tohit": 5,
+        "damage": [
+          [
+            "1d6+3",
+            "piercing"
+          ],
+          [
+            "2d4",
+            "poison"
+          ]
+        ],
+        "reach": 10
+      }
+    ],
+    "desc": "Auntie breeds them from basilisk-touched eggs. Their bite slows the blood until the joints grind.",
+    "saves": [],
+    "skills": {},
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 30,
+      "climb": 30,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 10,
+      "dex": 16,
+      "con": 12,
+      "int": 2,
+      "wis": 10,
+      "cha": 3
+    }
+  },
+  {
+    "name": "Basilisk Hatchling",
+    "faction": "Auntie",
+    "role": "Lockdown / petrification support",
+    "cr": 3,
+    "ac": 14,
+    "hp": 39,
+    "size": "sm",
+    "type": "monstrosity",
+    "subtype": "basilisk",
+    "languages": [],
+    "imm": [
+      "poison"
+    ],
+    "cond": [
+      "poisoned"
+    ],
+    "traits": [
+      "Stiffening Glance. A creature that starts its turn within 15 ft. of the hatchling and can see its eyes must make a DC 12 Constitution saving throw unless the hatchling is incapacitated. On a failure the creature's speed becomes 0 until the start of its next turn; if it fails by 5 or more, it is also restrained until the end of its next turn. A creature can avert its eyes as against a basilisk's gaze."
+    ],
+    "actions": [
+      {
+        "name": "Bite",
+        "kind": "attack",
+        "text": "A chunky, toothy bite.",
+        "tohit": 5,
+        "damage": [
+          [
+            "2d6+2",
+            "piercing"
+          ],
+          [
+            "2d6",
+            "poison"
+          ]
+        ],
+        "reach": 5
+      }
+    ],
+    "desc": "Valdershmort's offspring. Their gaze cannot yet turn flesh to stone—only make it forget how to move.",
+    "saves": [],
+    "skills": {},
+    "res": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 20,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 14,
+      "dex": 8,
+      "con": 15,
+      "int": 2,
+      "wis": 8,
+      "cha": 7
+    }
+  },
+  {
+    "name": "Coven Toad",
+    "faction": "Coven",
+    "supplier": "Auntie",
+    "role": "Puller / mount",
+    "cr": 1,
+    "ac": 11,
+    "hp": 39,
+    "size": "lg",
+    "type": "beast",
+    "subtype": "",
+    "languages": [],
+    "traits": [
+      "Amphibious. The toad can breathe air and water.",
+      "Hallucinogenic Skin. A creature that touches the toad or hits it with a melee attack while within 5 ft. of it must succeed on a DC 11 Constitution saving throw or be poisoned until the end of its next turn."
+    ],
+    "actions": [
+      {
+        "name": "Bite",
+        "kind": "attack",
+        "text": "A wide, wet, toothless crush.",
+        "tohit": 4,
+        "damage": [
+          [
+            "1d10+2",
+            "bludgeoning"
+          ],
+          [
+            "1d10",
+            "poison"
+          ]
+        ],
+        "reach": 5
+      },
+      {
+        "name": "Tongue Lash",
+        "kind": "attack",
+        "text": "On a hit, a Medium or smaller target is pulled up to 15 ft. toward the toad.",
+        "tohit": 4,
+        "damage": [
+          [
+            "1d4+2",
+            "bludgeoning"
+          ]
+        ],
+        "reach": 15
+      }
+    ],
+    "desc": "Supplied by Auntie. The coven rides them through the Doorinian bogs; their sweat is a coven-grade hallucinogen.",
+    "saves": [],
+    "skills": {},
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 20,
+      "fly": 0,
+      "swim": 40,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 15,
+      "dex": 13,
+      "con": 13,
+      "int": 2,
+      "wis": 10,
+      "cha": 3
+    }
+  },
+  {
+    "name": "Petrified Thrall",
+    "faction": "Coven",
+    "supplier": "Auntie",
+    "role": "Grappler / petrification setup",
+    "cr": 2,
+    "ac": 15,
+    "hp": 45,
+    "size": "med",
+    "type": "construct",
+    "subtype": "",
+    "imm": [
+      "poison",
+      "psychic"
+    ],
+    "cond": [
+      "charmed",
+      "exhaustion",
+      "frightened",
+      "paralyzed",
+      "petrified",
+      "poisoned"
+    ],
+    "languages": [],
+    "traits": [
+      "Mourning Grip. A creature grappled by the thrall has disadvantage on saving throws against being petrified or restrained."
+    ],
+    "actions": [
+      {
+        "name": "Stone Embrace",
+        "kind": "attack",
+        "text": "On a hit, a Medium or smaller target is grappled (escape DC 13). The thrall can grapple only one creature at a time.",
+        "tohit": 5,
+        "damage": [
+          [
+            "2d6+3",
+            "bludgeoning"
+          ]
+        ],
+        "reach": 5
+      }
+    ],
+    "desc": "Supplied by Auntie. Petrified victims, chiselled loose and walked home. They hold you still for Valdershmort.",
+    "saves": [],
+    "skills": {},
+    "res": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 20,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 16,
+      "dex": 8,
+      "con": 16,
+      "int": 3,
+      "wis": 8,
+      "cha": 5
+    }
+  },
+  {
+    "name": "Goblin Bone-Thrower",
+    "faction": "Gaga",
+    "role": "Ranged harasser",
+    "cr": 0.25,
+    "ac": 13,
+    "hp": 7,
+    "size": "sm",
+    "type": "humanoid",
+    "subtype": "goblinoid",
+    "skills": {
+      "ste": 2
+    },
+    "languages": [
+      "common",
+      "goblin"
+    ],
+    "traits": [
+      "Nimble Escape. The goblin can take the Disengage or Hide action as a bonus action on each of its turns.",
+      "Pelting. When a creature is hit by the Bone Sling attacks of two or more Bone-Throwers in the same round, it is knocked prone."
+    ],
+    "actions": [
+      {
+        "name": "Bone Sling",
+        "kind": "attack",
+        "text": "A knucklebone whipped from a gut-string sling.",
+        "tohit": 4,
+        "damage": [
+          [
+            "1d4+2",
+            "bludgeoning"
+          ]
+        ],
+        "range": 30
+      }
+    ],
+    "desc": "Gaga's goblins throw what she leaves behind. In volleys, they knock people flat for the trolls.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 8,
+      "dex": 14,
+      "con": 10,
+      "int": 10,
+      "wis": 8,
+      "cha": 8
+    }
+  },
+  {
+    "name": "Troll Whelp",
+    "faction": "Gaga",
+    "role": "Prone-hunter",
+    "cr": 2,
+    "ac": 14,
+    "hp": 45,
+    "size": "med",
+    "type": "giant",
+    "subtype": "troll",
+    "skills": {
+      "prc": 1
+    },
+    "languages": [
+      "giant"
+    ],
+    "traits": [
+      "Regeneration. The whelp regains 5 hit points at the start of its turn. If it takes acid or fire damage, this trait doesn't function at the start of its next turn.",
+      "Gnaw. When the whelp hits a prone creature with its Bite, the Bite deals an extra 1d8 piercing damage."
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "kind": "utility",
+        "text": "The whelp makes two attacks: one with its Bite and one with its Claw."
+      },
+      {
+        "name": "Bite",
+        "kind": "attack",
+        "text": "Too many teeth for its size.",
+        "tohit": 5,
+        "damage": [
+          [
+            "1d6+3",
+            "piercing"
+          ]
+        ],
+        "reach": 5
+      },
+      {
+        "name": "Claw",
+        "kind": "attack",
+        "text": "A raking swipe.",
+        "tohit": 5,
+        "damage": [
+          [
+            "1d8+3",
+            "slashing"
+          ]
+        ],
+        "reach": 5
+      }
+    ],
+    "desc": "Half-grown trolls Gaga keeps hungry. They go for whatever falls over.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 16,
+      "dex": 12,
+      "con": 16,
+      "int": 6,
+      "wis": 9,
+      "cha": 6
+    }
+  },
+  {
+    "name": "Bugbear Sack-Snatcher",
+    "faction": "Gaga",
+    "role": "Abductor",
+    "cr": 1,
+    "ac": 14,
+    "hp": 27,
+    "size": "med",
+    "type": "humanoid",
+    "subtype": "goblinoid",
+    "skills": {
+      "ste": 2
+    },
+    "languages": [
+      "common",
+      "goblin"
+    ],
+    "traits": [
+      "Brute. A melee weapon deals one extra die of its damage when the bugbear hits with it (included in the attack).",
+      "Surprise Attack. If the bugbear surprises a creature and hits it with an attack during the first round of combat, the target takes an extra 2d6 damage from the attack."
+    ],
+    "actions": [
+      {
+        "name": "Morningstar",
+        "kind": "attack",
+        "text": "A spiked club with a sack tied to the haft.",
+        "tohit": 4,
+        "damage": [
+          [
+            "2d8+2",
+            "piercing"
+          ]
+        ],
+        "reach": 5
+      },
+      {
+        "name": "Bag It (Recharge 5-6)",
+        "kind": "save",
+        "text": "One Small or smaller creature within 5 ft. makes a DC 12 Dexterity saving throw. On a failure it is stuffed into the bugbear's sack: it is blinded and restrained, and can use its action to make a DC 12 Strength (Athletics) or Dexterity (Acrobatics) check to escape. Damaging the sack (AC 11, 10 hp, immune to poison and psychic) also frees it. The bugbear's speed is halved while the sack is full.",
+        "dc": 12,
+        "ability": "dex"
+      }
+    ],
+    "desc": "Gaga's collectors. Halflings, gnomes and Archfey courtiers fit in the sack equally well.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 15,
+      "dex": 14,
+      "con": 13,
+      "int": 8,
+      "wis": 11,
+      "cha": 9
+    }
+  },
+  {
+    "name": "Ogre Log-Ram",
+    "faction": "Gaga",
+    "role": "Breacher / mass shove",
+    "cr": 3,
+    "ac": 11,
+    "hp": 76,
+    "size": "lg",
+    "type": "giant",
+    "subtype": "ogre",
+    "languages": [
+      "common",
+      "giant"
+    ],
+    "traits": [
+      "Doorbreaker. The ogre deals double damage to objects and structures."
+    ],
+    "actions": [
+      {
+        "name": "Log Ram",
+        "kind": "attack",
+        "text": "A whole tree trunk, swung end-first.",
+        "tohit": 6,
+        "damage": [
+          [
+            "2d10+4",
+            "bludgeoning"
+          ]
+        ],
+        "reach": 10
+      },
+      {
+        "name": "Sweeping Log",
+        "kind": "save",
+        "text": "The ogre swings the log through a 15-foot cone. Each creature in it makes a DC 14 Dexterity saving throw, taking 2d10+4 bludgeoning damage and being pushed 10 ft. away on a failure, or half damage only on a success.",
+        "dc": 14,
+        "ability": "dex",
+        "damage": [
+          [
+            "2d10+4",
+            "bludgeoning"
+          ]
+        ],
+        "onSave": "half"
+      }
+    ],
+    "desc": "Gaga points; the ogre walks the log through the shield wall, the gate, and the people behind it.",
+    "saves": [],
+    "skills": {},
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 40,
+      "fly": 0,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 19,
+      "dex": 8,
+      "con": 16,
+      "int": 5,
+      "wis": 7,
+      "cha": 7
+    }
+  },
+  {
+    "name": "Coven Bogle",
+    "faction": "Coven",
+    "supplier": "Gaga",
+    "role": "Terrain denial",
+    "cr": 0.5,
+    "ac": 13,
+    "hp": 18,
+    "size": "sm",
+    "type": "fey",
+    "subtype": "bogle",
+    "skills": {
+      "ste": 2
+    },
+    "traits": [
+      "Mud Meld. While in mud, a bog or shallow water, the bogle can take the Hide action as a bonus action."
+    ],
+    "actions": [
+      {
+        "name": "Sticky Fistful",
+        "kind": "attack",
+        "text": "A handful of reeking bog-mud. On a hit, the target's speed is reduced by 10 ft. until the end of its next turn.",
+        "tohit": 5,
+        "damage": [
+          [
+            "1d4+3",
+            "bludgeoning"
+          ]
+        ],
+        "range": 30
+      },
+      {
+        "name": "Muck Puddle (1/Day)",
+        "kind": "utility",
+        "text": "The bogle spits a 15-foot square of sucking mud onto the ground within 30 ft. It is difficult terrain for 1 minute; Coven Bogles and Coven Toads ignore it."
+      }
+    ],
+    "desc": "Supplied by Gaga. Bog fey bribed with shiny teeth; they turn any field into a swamp for the trolls to fight in.",
+    "saves": [],
+    "res": [],
+    "imm": [],
+    "cond": [],
+    "legendary": [],
+    "languages": [
+      "common",
+      "sylvan"
+    ],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 0,
+      "swim": 30,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 8,
+      "dex": 16,
+      "con": 12,
+      "int": 9,
+      "wis": 12,
+      "cha": 10
+    }
+  },
+  {
+    "name": "Archfey Husk",
+    "faction": "Coven",
+    "supplier": "Gaga",
+    "role": "Coven battery / lure",
+    "cr": 5,
+    "ac": 15,
+    "hp": 75,
+    "size": "med",
+    "type": "fey",
+    "subtype": "drained archfey",
+    "imm": [
+      "poison"
+    ],
+    "cond": [
+      "charmed",
+      "poisoned"
+    ],
+    "languages": [
+      "common",
+      "sylvan",
+      "elvish"
+    ],
+    "traits": [
+      "Coven Battery. When a hag of the Yagha Coven within 60 ft. of the husk casts a coven spell, she can drain the husk: it takes 10 force damage and the spell's save DC increases by 2.",
+      "Hollow Glamour. The husk sheds dim light in a 10-foot radius and can't be surprised."
+    ],
+    "actions": [
+      {
+        "name": "Multiattack",
+        "kind": "utility",
+        "text": "The husk makes two Glass Talon attacks."
+      },
+      {
+        "name": "Glass Talon",
+        "kind": "attack",
+        "text": "Fingers of cracked fey glass.",
+        "tohit": 6,
+        "damage": [
+          [
+            "2d6+3",
+            "slashing"
+          ]
+        ],
+        "reach": 5
+      },
+      {
+        "name": "Hollow Song (Recharge 5-6)",
+        "kind": "save",
+        "text": "Each creature within 30 ft. that can hear the husk makes a DC 15 Wisdom saving throw or is charmed until the end of its next turn. While charmed this way, a creature must use its movement on its turn to move toward the nearest hag of the Yagha Coven by the safest route.",
+        "dc": 15,
+        "ability": "wis"
+      }
+    ],
+    "desc": "Supplied by Gaga, who caught it. What is left of a drained Archfey courtier, hollowed out and hung with chains, still singing.",
+    "saves": [],
+    "skills": {},
+    "res": [],
+    "legendary": [],
+    "v14": true,
+    "speed": {
+      "walk": 30,
+      "fly": 30,
+      "swim": 0,
+      "climb": 0,
+      "burrow": 0
+    },
+    "abilities": {
+      "str": 12,
+      "dex": 16,
+      "con": 14,
+      "int": 10,
+      "wis": 10,
+      "cha": 18
+    }
   }
 ]

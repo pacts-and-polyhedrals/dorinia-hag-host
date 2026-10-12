@@ -174,3 +174,134 @@ File: `rage-drum-goblin.webp`
 ```
 screaming goblin with a red war-crest and huge ears, bone skull mallets raised mid-swing over a giant hide war drum painted with an eye, orange shockwave lines. Palette: rust, crimson, troll green and ember orange. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
 ```
+
+## — v1.4.0 additions —
+
+## Quickling Thief
+File: `quickling-thief.webp`
+
+```
+tiny blue-grey fey with enormous pointed ears and slit yellow eyes, wicked needle-tooth grin, sprinting so fast it leaves inked speed streaks, clutching a stolen coin purse and a glowing wand, needle dagger. Palette: sickly purples, deep blacks and cold blue soul-light. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Quickling Assassin
+File: `quickling-assassin.webp`
+
+```
+tiny masked and hooded quickling with glowing red slit eyes, long ears, a blackthorn needle in each hand dripping nightmare sap, blurred speed streaks. Palette: sickly purples, deep blacks and cold blue soul-light. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Darkling Lantern-Snuffer
+File: `darkling-lantern-snuffer.webp`
+
+```
+small hooded darkling with huge glowing white eyes and a stitched grin, carrying a long brass wick-hook pole from which hangs a freshly snuffed, smoking lantern. Palette: sickly purples, deep blacks and cold blue soul-light. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Soul-Moth Swarm
+File: `soul-moth-swarm.webp`
+
+```
+a whirling cloud of pale grey moths with tiny glowing faces, parting in the middle to form a face with two cold-blue soul-light eyes and a mouth full of moths. Palette: sickly purples, deep blacks and cold blue soul-light. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Yuan-ti Foot Soldier
+File: `yuan-ti-foot-soldier.webp`
+
+```
+snake-faced yuan-ti infantry in a dented crested helmet and scale armour, round green scale shield with a gold boss, spear, tail curling behind. Palette: toxic greens, venom yellow and stone grey. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Yuan-ti Broodling Slinger
+File: `yuan-ti-broodling-slinger.webp`
+
+```
+small snake-kid with a broken eggshell still on its head, huge yellow eyes and baby fangs, whirling a sling loaded with a dripping green venom glob. Palette: toxic greens, venom yellow and stone grey. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Stone-Scale Adder
+File: `stone-scale-adder.webp`
+
+```
+big-headed grey snake with stony, cracked scales, yellow slit eyes, long fangs dripping chalky venom, coiled body. Palette: toxic greens, venom yellow and stone grey. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Basilisk Hatchling
+File: `basilisk-hatchling.webp`
+
+```
+chubby six-legged baby basilisk with a giant head, two glowing yellow-green stiffening eyes, eggshell stuck to its spiky back, toothy grin. Palette: toxic greens, venom yellow and stone grey. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Goblin Bone-Thrower
+File: `goblin-bone-thrower.webp`
+
+```
+goblin in a leather skullcap with a bandolier of knucklebones, whipping a gut-string sling with a bone in it, orange motion arcs. Palette: rust, crimson, troll green and ember orange. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Troll Whelp
+File: `troll-whelp.webp`
+
+```
+half-grown green troll with long ears, tusks, matted hair and drool, long clawed arms, gnawed bone at its feet. Palette: rust, crimson, troll green and ember orange. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Bugbear Sack-Snatcher
+File: `bugbear-sack-snatcher.webp`
+
+```
+furry bear-eared bugbear with a sly grin and droopy eyes, spiked morningstar in one hand, a lumpy sack over its shoulder with a captive's feet kicking out. Palette: rust, crimson, troll green and ember orange. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Ogre Log-Ram
+File: `ogre-log-ram.webp`
+
+```
+hulking ogre with a tiny dim head, tusks and a bulbous nose, carrying a whole tree trunk under its arms like a battering ram. Palette: rust, crimson, troll green and ember orange. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Coven Crow
+File: `coven-crow.webp`
+
+```
+big-headed black crow with one huge glowing gold eye and a pale beak, perched on a skull, a three-ring coven band on its leg. Palette: tarnished gold, deep umber and black. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Hollow Hound
+File: `hollow-hound.webp`
+
+```
+gaunt grey hag-hound with ribs showing, an iron jaw plate full of teeth, pale glowing blue eyes, chain collar. Palette: tarnished gold, deep umber and black. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Coven Toad
+File: `coven-toad.webp`
+
+```
+enormous warty bog toad with a pink hallucinogenic sheen, orange slit eyes on top of its head, a saddle with a three-ring coven sigil, long sticky tongue lashing out. Palette: tarnished gold, deep umber and black. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Petrified Thrall
+File: `petrified-thrall.webp`
+
+```
+sad grey stone statue of a former victim, cracked and mossy, mouth frozen open, a single green tear, reaching forward with stone hands for an embrace. Palette: tarnished gold, deep umber and black. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Coven Bogle
+File: `coven-bogle.webp`
+
+```
+small lumpy mud-fey with mismatched gold eyes and a grin full of stolen gold teeth, dripping bog mud, holding a mud ball, standing in a bubbling puddle. Palette: tarnished gold, deep umber and black. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Archfey Husk
+File: `archfey-husk.webp`
+
+```
+drained fey courtier with a cracked glass face, hollow glowing gold eyes, a broken crown, tattered court robes hung with chains, glass talon hands, floating. Palette: tarnished gold, deep umber and black. Style: grotesque chibi dark fantasy, gothic graphic-novel treatment: oversized head and eyes, compact body, big hands, distinctive silhouette; crooked teeth, warts, scars and bulbous features; heavy textured ink outlines, scratchy cross-hatching and strong internal shadows; painterly worn surfaces; dramatic rim lighting and magical glow; darkly playful, repulsive and comical at once, grimdark with Warhammer menace. Full-body character, theatrical pose, dark vignette background.
+```
+
+## Ability & spell icons
+Icons live in `assets/icons/` (256×256, rounded-square ink frame, faction or spell-school colour, main motif plus a small corner emblem). They're drawn by `art-source/icons.py`; replace any file with a same-named 256×256 WebP to override it.
